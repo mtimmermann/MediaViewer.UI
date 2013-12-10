@@ -89,7 +89,10 @@ module.exports = function (grunt) {
                 src: [
                     'vendor/plugins/backbone/backbone-validation.js',
                     'vendor/plugins/serialize-object.js',
-                    'vendor/bootstrap/js/bootstrap.js'
+                    'vendor/bootstrap/js/bootstrap.js',
+                    'assets/shared/js/config/AppSettings.js',
+                    'assets/shared/js/base_classes/ItemViewFadeIn.js',
+                    'assets/shared/js/base_classes/ModelFormValidation.js'
                 ]
             },
             admin_plugins: {

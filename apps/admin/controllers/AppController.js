@@ -3,15 +3,14 @@ define(function(require, exports, module) {
 	var App = require('App'),
 		HeaderView = require('views/Header'),
 		PaginatorView = require('views/Paginator'),
-        SearchInputView = require('views/users/search/SearchInput');
-        // VideoListLayout = require('views/main_list/VideoListLayout'),
-        // VideoListView = require('views/main_list/VideoList'),
-        // VideoListInfiniteScrollView = require('views/infinite_scroll/VideoList'),
-        // VideoDetailsView = require('views/VideoDetails'),
-        // VideoEditView = require('views/VideoEdit'),
-        // Videos = require('collections/Videos'),
-        // Video = require('models/Video'),
-		// AboutView = require('views/About');
+        SearchInputView = require('views/users/search/SearchInput'),
+        IndexView = require('views/Index'),
+        UserListLayout = require('views/users/list/ListLayout'),
+        UserListView = require('views/users/list/List'),
+        UserDetailsView = require('views/users/Details'),
+        UserEditView = require('views/users/Edit'),
+        Users = require('collections/Users');
+        // Video = require('models/Video');
 
     return Backbone.Marionette.Controller.extend({
 
@@ -29,7 +28,6 @@ define(function(require, exports, module) {
                 }
             }
 
-
         	this._headerView = new HeaderView({ userInfo: this._userInfo });
             App.headerRegion.show(this._headerView);
 
@@ -44,7 +42,11 @@ define(function(require, exports, module) {
         index: function () {
             this._headerView.setActiveLink('index');
 
-            this._initVideoCollection();
+            App.mainRegion.show(new IndexView());
+        },
+
+        users: function() {
+            this._initVideoUserCollection();
 
             //$.when(App.collections.videos.deferred.promise()).done(function () {
                 // var videoListLayout = new VideoListLayout();
@@ -63,10 +65,6 @@ define(function(require, exports, module) {
                 // // Show video search input region
                 // videoListLayout.search.show(new SearchInputView());
             //});
-        },
-
-        users: function() {
-
         },
 
         userAdd: function() {
@@ -127,9 +125,9 @@ define(function(require, exports, module) {
             });
         },
 
-        _initVideoCollection: function() {
-            // App.collections.videos = new Videos();
-            // App.collections.videos.getCollection();
+        _initVideoUserCollection: function() {
+            App.collections.users = new Users();
+            App.collections.users.getCollection();
         },
 
         // Prevent UI shifting on paging operations

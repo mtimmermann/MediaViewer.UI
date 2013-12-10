@@ -4,11 +4,10 @@ define(function(require, exports, module) {
        //"index" must be a method in AppRouter's controller
        appRoutes: {
            '': 'index',
-           'infiniteScroll': 'infiniteScroll',
-           'videos/:id': 'videoDetails',
-           'videos/edit/:id': 'videoEdit',
-           'addVideo': 'videoAdd',
-           'about': 'about'
+           'users': 'users',
+           'users/:id': 'users',
+           'users/edit/:id': 'userEdit',
+           'addUser': 'userAdd'
        }
    });
 

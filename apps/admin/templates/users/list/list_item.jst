@@ -1,0 +1,20 @@
+<a href="#videos/{{ id }}" class="thumbnail plain">
+    <div>
+        <img src="{{ thumbnail }}" alt="{{ title }}" />
+    </div>
+    <div>
+        <% if (title) { %>
+        <span><strong>{{ title }}</strong></span>
+        <% } %>
+    </div>
+    <div>
+        <% if (subTitle) { %>
+        <span>{{ subTitle }}</span>
+        <% } %>
+    </div>
+    <div class="meta">
+        <% if (userLabel) { %>
+        <span>uploaded by {{ userLabel }}</span>
+        <% } %>
+    </div>
+</a>

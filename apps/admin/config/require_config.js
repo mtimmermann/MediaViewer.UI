@@ -13,7 +13,7 @@ require.config({
         marionette: '../../vendor/backbone.marionette',
         backbone: '../../vendor/backbone',
         underscore: '../../vendor/underscore',
-        plugins: '../../deploy/login/js/plugins',
+        plugins: '../../deploy/admin/js/plugins',
         tpl: '../../vendor/plugins/require/tpl'
     },
     shim: {

@@ -3,8 +3,9 @@
 *.swp
 *.swo
 
-/less/main.css
+/less/admin.css
 /less/login.css
+/less/main.css
 
 /deploy
 /node_modules

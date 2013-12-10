@@ -16,7 +16,8 @@ module.exports = function (grunt) {
                 },
                 files: {
                     'less/main.css': 'less/main.less',
-                    'less/login.css': 'less/login.less'
+                    'less/login.css': 'less/login.less',
+                    'less/admin.css': 'less/admin.less',
                 }
             }
         },
@@ -39,6 +40,15 @@ module.exports = function (grunt) {
                     { expand: true, cwd: 'vendor/bootstrap/fonts', src: '**', dest: 'deploy/fonts' }
                 ]
             },
+            admin: {
+                files:[
+                    { src: 'apps/admin/index.html', dest:'deploy/admin/index.html' },
+                    { src: 'assets/config/configuration.json', dest:'deploy/config/configuration.json' },
+                    //{ expand: true, cwd: 'scripts/vendor/', src: 'jquery-1.10.2.js', dest: 'deploy/login/js/vendor' },
+                    { expand: true, cwd: 'apps/admin/', src: 'img/**', dest: 'deploy' }
+                    //{ expand: true, cwd: 'assets/shared', src: 'img/**/**', dest: 'deploy' }
+                ]
+            },
             login: {
                 files:[
                     { src: 'apps/login/index.html', dest:'deploy/login/index.html' },
@@ -48,17 +58,6 @@ module.exports = function (grunt) {
                     //{ expand: true, cwd: 'assets/shared', src: 'img/**/**', dest: 'deploy' }
                 ]
             },
-            // portal: {
-            //     files:[
-            //         { src: 'apps/portal/index.html', dest:'deploy/index.html' },
-            //         { src: 'assets/config/configuration.json', dest:'deploy/config/configuration.json' },
-            //         { src: 'ie8-and-down.css', dest: 'deploy/styles/ie8-and-down.css'},
-            //         //{ expand: true, cwd: 'scripts/vendor/', src: 'jquery-1.10.2.js', dest: 'deploy/portal/js/vendor' },
-            //         // { expand: true, cwd: 'apps/portal/', src: 'img/**', dest: 'deploy/portal' },
-            //         // { expand: true, cwd: 'assets/shared', src: 'img/**/**', dest: 'deploy/portal' }
-            //         { expand: true, cwd: 'assets/images/', src: '**/**', dest: 'deploy/img/' }
-            //     ]
-            // },
             mainapp: {
                 files:[
                     { src: 'apps/mainapp/index.html', dest:'deploy/index.html' },
@@ -93,6 +92,25 @@ module.exports = function (grunt) {
                     'vendor/bootstrap/js/bootstrap.js'
                 ]
             },
+            admin_plugins: {
+                options: {
+                    banner: '//concat plugins\n',
+                    footer: '//end concat plugins\n'
+                },
+                dest: 'deploy/admin/js/plugins.js',
+                src: [
+                    'vendor/plugins/backbone/backbone.paginator.js',
+                    'vendor/plugins/backbone/backbone-validation.js',
+                    'vendor/plugins/serialize-object.js',
+                    'vendor/bootstrap/js/bootstrap.js',
+                    'vendor/bootstrap/js/bootstrap-dropdown.js',
+                    'vendor/moment.js',
+                    'assets/shared/js/config/AppSettings.js',
+                    'assets/shared/js/base_classes/ItemViewFadeIn.js',
+                    'assets/shared/js/base_classes/ModelFormValidation.js',
+                    'assets/shared/js/base_classes/RegionFadeIn.js'
+                ]
+            },
             mainapp_plugins: {
                 options: {
                     banner: '//concat plugins\n',
@@ -125,6 +143,11 @@ module.exports = function (grunt) {
             login_scripts: {
                 files: ['apps/login/**/*.js', 'apps/login/**/*.jst', 'vendor/**/*.js', 'assets/**/*.js'],
                 tasks: ['requirejs:login', 'copy','notify:scripts'],
+                options: { livereload: true }
+            },
+            admin_scripts: {
+                files: ['apps/admin/**/*.js', 'apps/admin/**/*.jst', 'vendor/**/*.js', 'assets/**/*.js'],
+                tasks: ['requirejs:admin', 'copy','notify:scripts'],
                 options: { livereload: true }
             },
             mainapp_scripts: {
@@ -234,6 +257,31 @@ module.exports = function (grunt) {
                     cssIn: 'less/login.css',
                     out: 'deploy/styles/login.min.css'
                 }
+            },
+            admin: {
+                options: {
+                    baseUrl: 'apps/admin',
+                    mainConfigFile: 'apps/admin/config/require_config.js',
+                    out: 'deploy/admin/js/main.js',
+                    generateSourceMaps: false,
+                    useSourceUrl: false
+
+                }
+            },
+            admin_prod: {
+                options: {
+                    baseUrl: 'apps/admin',
+                    mainConfigFile: 'apps/admin/config/require_config.js',
+                    out: 'deploy/admin/js/main.js',
+                    optimize: 'uglify2'
+                }
+            },
+            adminCSS: {
+                options: {
+                    optimizeCss: 'standard',
+                    cssIn: 'less/admin.css',
+                    out: 'deploy/styles/admin.min.css'
+                }
             }
         },
         gitinfo:{},
@@ -270,14 +318,17 @@ module.exports = function (grunt) {
     // Build login for development
     grunt.registerTask('login', ['base','requirejs:login','requirejs:loginCSS','notify:build']);
 
+    // Build admin for development
+    grunt.registerTask('admin', ['base','requirejs:admin','requirejs:adminCSS','notify:build']);
+
     // Build mainapp for development
     grunt.registerTask('mainapp', ['base','requirejs:mainapp','requirejs:mainappCSS','notify:build']);
 
-    // Build mainapp and login for development
-    grunt.registerTask('dev', ['base', 'requirejs:login','requirejs:loginCSS','requirejs:mainapp','requirejs:mainappCSS','notify:build']);
+    // Build mainapp, login and admin for development
+    grunt.registerTask('dev', ['base','requirejs:login','requirejs:loginCSS','requirejs:admin','requirejs:adminCSS','requirejs:mainapp','requirejs:mainappCSS','notify:build']);
 
-    // Build mainapp and login for production
-    grunt.registerTask('prod', ['base', 'requirejs:login_prod','requirejs:loginCSS','requirejs:mainapp_prod','requirejs:mainappCSS']);
+    // Build mainapp, login and admin for production
+    grunt.registerTask('prod', ['base', 'requirejs:login_prod','requirejs:loginCSS','requirejs:admin_prod','requirejs:adminCSS','requirejs:mainapp_prod','requirejs:mainappCSS']);
 
     // Default task runs complete dev build
     grunt.registerTask('default', ['dev']);

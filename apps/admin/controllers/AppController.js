@@ -3,20 +3,32 @@ define(function(require, exports, module) {
 	var App = require('App'),
 		HeaderView = require('views/Header'),
 		PaginatorView = require('views/Paginator'),
-        SearchInputView = require('views/videos_search/SearchInput'),
-        VideoListLayout = require('views/main_list/VideoListLayout'),
-        VideoListView = require('views/main_list/VideoList'),
-        VideoListInfiniteScrollView = require('views/infinite_scroll/VideoList'),
-        VideoDetailsView = require('views/VideoDetails'),
-        VideoEditView = require('views/VideoEdit'),
-        Videos = require('collections/Videos'),
-        Video = require('models/Video'),
-		AboutView = require('views/About');
+        SearchInputView = require('views/users/search/SearchInput');
+        // VideoListLayout = require('views/main_list/VideoListLayout'),
+        // VideoListView = require('views/main_list/VideoList'),
+        // VideoListInfiniteScrollView = require('views/infinite_scroll/VideoList'),
+        // VideoDetailsView = require('views/VideoDetails'),
+        // VideoEditView = require('views/VideoEdit'),
+        // Videos = require('collections/Videos'),
+        // Video = require('models/Video'),
+		// AboutView = require('views/About');
 
     return Backbone.Marionette.Controller.extend({
 
         initialize: function (/*options*/) {
             this._userInfo = App.settings.userInfo || {};
+            if (!this._userInfo.isLoggedIn) {
+                window.location.replace('/login');
+            }
+            this._isAdmin = false;
+            if (_.isArray(this._userInfo.roles)) {
+                if (_.indexOf(this._userInfo.roles, 'super-admin') >= 0) {
+                    this._isAdmin = true;
+                } else {
+                    window.location.replace('/login');       
+                }
+            }
+
 
         	this._headerView = new HeaderView({ userInfo: this._userInfo });
             App.headerRegion.show(this._headerView);
@@ -34,42 +46,36 @@ define(function(require, exports, module) {
 
             this._initVideoCollection();
 
-            $.when(App.collections.videos.deferred.promise()).done(function () {
-                var videoListLayout = new VideoListLayout();
-                App.mainRegion.show(videoListLayout);
+            //$.when(App.collections.videos.deferred.promise()).done(function () {
+                // var videoListLayout = new VideoListLayout();
+                // App.mainRegion.show(videoListLayout);
 
-                // Show List region
-                videoListLayout.list.show(
-                    new VideoListView({'collection': App.collections.videos}));
+                // // Show List region
+                // videoListLayout.list.show(
+                //     new VideoListView({'collection': App.collections.videos}));
 
-                // Show pagination regions
-                videoListLayout.paginatorTop.show(
-                    new PaginatorView(App.collections.videos));
-                videoListLayout.paginatorBottom.show(
-                    new PaginatorView(App.collections.videos));
+                // // Show pagination regions
+                // videoListLayout.paginatorTop.show(
+                //     new PaginatorView(App.collections.videos));
+                // videoListLayout.paginatorBottom.show(
+                //     new PaginatorView(App.collections.videos));
 
-                // Show video search input region
-                videoListLayout.search.show(new SearchInputView());
-            });
+                // // Show video search input region
+                // videoListLayout.search.show(new SearchInputView());
+            //});
         },
 
-        infiniteScroll: function() {
-            this._headerView.setActiveLink('infinite-scroll');
+        users: function() {
 
-            this._initVideoCollection();
-
-            $.when(App.collections.videos.deferred.promise()).done(function () {
-                App.mainRegion.show(new VideoListInfiniteScrollView({ 'collection': App.collections.videos }));
-            });
         },
 
-        videoAdd: function() {
+        userAdd: function() {
             this._headerView.setActiveLink('add-video');
             var video = new Video();
             App.mainRegion.show(new VideoEditView({model: video}));
         },
 
-        videoDetails: function(modelId) {
+        userDetails: function(modelId) {
             var self = this;
             this._headerView.setActiveLink('none');
 
@@ -101,7 +107,7 @@ define(function(require, exports, module) {
             });
         },
 
-        videoEdit: function(modelId) {
+        userEdit: function(modelId) {
             var self = this;
             this._headerView.setActiveLink('none');
             var model = new Video({'id': modelId});
@@ -121,14 +127,9 @@ define(function(require, exports, module) {
             });
         },
 
-        about: function() {
-        	this._headerView.setActiveLink('about');
-        	App.mainRegion.show(new AboutView());
-        },
-
         _initVideoCollection: function() {
-            App.collections.videos = new Videos();
-            App.collections.videos.getCollection();
+            // App.collections.videos = new Videos();
+            // App.collections.videos.getCollection();
         },
 
         // Prevent UI shifting on paging operations

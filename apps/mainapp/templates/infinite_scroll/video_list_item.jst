@@ -1,0 +1,38 @@
+<div data-video-list-inf-scroll="item" class="row clearfix" style="display:none;">
+    <div class="col-md-2 column"></div>
+    <div class="col-md-8 column thumbnail-container">
+        <a href="#videos/{{ id }}" class="thumbnail plain">
+            <div class="inline-block left-region">
+                <img src="{{ thumbnail }}" alt="{{ title }}" class="hidden-xs" />
+                <img src="{{ thumbnail }}" alt="{{ title }}" class="visible-xs small" />
+                <% /*
+                <img src="{{ picture === null ? App.settings.defaultAvatarPath : App.settings.picsUrl() + picture }}" alt="{{ firstName }}" class="hidden-xs">
+                <img src="{{ picture === null ? App.settings.defaultAvatarPath : App.settings.picsUrl() + picture }}" alt="{{ firstName }}" class="visible-xs small">
+                */ %>
+            </div>
+            <div class="inline-block center-region">
+                <div>
+                    <% if (title) { %>
+                    <span><strong>{{ title }}</strong></span>
+                    <% } %>
+                </div>
+                <div>
+                    <% if (subTitle) { %>
+                    <span>{{ subTitle }}</span>
+                    <% } %>
+                </div>
+                <div class="meta">
+                    <% if (userLabel) { %>
+                    <span>uploaded by {{ userLabel }}</span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="inline-block right-region">
+                <% if (notes) { %>
+                <span>{{ notes }}</span>
+                <% } %>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-2 column"></div>
+</div>

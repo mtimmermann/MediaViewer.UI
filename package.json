@@ -1,0 +1,29 @@
+{
+    "name": "MediaViewer.UI",
+    "author": "Mark Timmermann",
+    "description": "",
+    "version": "0.0.1",
+    "description": "A media content management and sharing web application",
+    "engines": {
+        "node": ">=0.10.22",
+        "npm": ">=1.3.4"
+    },
+    "devDependencies": {
+        "grunt": "~0.4.2",
+        "grunt-contrib-copy": "~0.4.1",
+        "grunt-contrib-concat": "~0.3.0",
+        "grunt-contrib-watch": "~0.5.3",
+        "grunt-contrib-clean": "~0.5.0",
+        "grunt-notify": "~0.2.16",
+        "grunt-contrib-requirejs": "~0.4.1",
+        "grunt-gitinfo": "~0.1.1",
+        "grunt-contrib-requirejs": "~0.4.1",
+        "grunt-contrib-compress": "~0.5.2",
+        "grunt-contrib-jshint": "~0.7.2",
+        "grunt-contrib-less": "~0.8.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mtimmermann/MediaViewer.UI.git"
+    }
+}

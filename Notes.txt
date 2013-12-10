@@ -1,0 +1,24 @@
+
+TODO:
+-----
+Setup jQuery and dropzone w/ require.js
+
+
+Bootstrap notifications:
+http://goodybag.github.io/bootstrap-notify/
+https://github.com/goodybag/bootstrap-notify
+
+
+File uploaders
+--------------
+
+http://www.queness.com/post/11434/7-javascript-ajax-file-upload-plugins
+
+http://www.dropzonejs.com/
+
+http://fineuploader.com/
+
+http://www.webmonkey.com/2013/02/dropzone/
+
+Dropzone require.js AMD
+https://raw.github.com/enyo/dropzone/master/downloads/dropzone-amd-module.js

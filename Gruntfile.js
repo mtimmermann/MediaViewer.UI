@@ -15,7 +15,7 @@ module.exports = function (grunt) {
                     yuicompress: true
                 },
                 files: {
-                    'less/mainapp.css': 'less/mainapp.less',
+                    'less/main.css': 'less/main.less',
                     'less/login.css': 'less/login.less'
                 }
             }
@@ -206,8 +206,8 @@ module.exports = function (grunt) {
             mainappCSS: {
                 options: {
                     optimizeCss: 'standard',
-                    cssIn: 'less/mainapp.css',
-                    out: 'deploy/styles/mainapp.min.css'
+                    cssIn: 'less/main.css',
+                    out: 'deploy/styles/main.min.css'
                 }
             },
             login: {

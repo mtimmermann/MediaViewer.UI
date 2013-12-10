@@ -3,7 +3,7 @@
 *.swp
 *.swo
 
-/less/mainapp.css
+/less/main.css
 /less/login.css
 
 /deploy

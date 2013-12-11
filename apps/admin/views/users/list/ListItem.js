@@ -16,7 +16,7 @@ define(function(require, exports, module) {
         },
 
         edit: function() {
-            window.location.replace('#users/edit/'+ this.model.get('id')); 
+            window.location.replace('#users/edit/'+ this.model.get('id'));
         }
     });
 

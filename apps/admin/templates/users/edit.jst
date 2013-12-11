@@ -14,17 +14,17 @@
                 <div class="inline-block left-region">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" value="{{ model.email }}" />
+                        <input type="text" id="email" name="email" class="form-control" value="{{ model.email }}" tabindex="1" />
                         <span class="help-inline"></span>
                     </div>
                     <div class="form-group">
                         <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" class="form-control" value="{{ model.firstName }}" />
+                        <input type="text" id="firstName" name="firstName" class="form-control" value="{{ model.firstName }}" tabindex="2" />
                         <span class="help-inline"></span>
                     </div>
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" class="form-control" value="{{ model.lastName }}" />
+                        <input type="text" id="lastName" name="lastName" class="form-control" value="{{ model.lastName }}" tabindex="3" />
                         <span class="help-inline"></span>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <input type="checkbox" id="deleted" name="deleted" class="form-control checkbox inline-block" value="deleted"
                         <% if (model.deleted) { %>
                         checked="checked"
-                        <% } %> />
+                        <% } %> tabindex="4" />
                         <span class="help-inline"></span>
                     </div>
                     <div class="form-group">
@@ -46,7 +46,7 @@
                                     <input name="roles" type="checkbox" value="{{role}}"
                                     <% if (_.indexOf(model.roles, role) >= 0) { %>
                                     checked="checked"
-                                    <% } %> /> {{rolesMap[role]}}
+                                    <% } %> tabindex="5" /> {{rolesMap[role]}}
                                 </li>
                                 <% } %>
                             </ul>
@@ -59,21 +59,23 @@
                     <div data-model-edit="change-password-form-group" style="display:none">
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" id="password" name="password" class="form-control" value="" placeholder="Password" tabindex="4" />
+                            <input type="password" id="password" name="password" class="form-control" value="" placeholder="Password" tabindex="6" />
                             <span class="help-inline"></span>
                         </div>
                         <div class="form-group">
                             <label for="confirmPassword">Confirm Password</label>
-                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" value="" placeholder="Confirm Password" tabindex="5" />
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" value="" placeholder="Confirm Password" tabindex="7" />
                             <span class="help-inline"></span>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <button data-model-edit-button="save" class="btn btn-primary save">Save</button>
-                    <% if (model.id) { %>
-                    <button data-model-edit-button="delete" class="btn delete">Delete</button>
-                    <% } %>
+                    <div class="form-group">
+                        <button data-model-edit-button="save" class="btn btn-primary save" tabindex="8">Save</button>
+                        <% if (model.id) { %>
+                        <button data-model-edit-button="delete" class="btn delete" tabindex="9">Delete</button>
+                        <% } %>
+                    </div>
                 </div>
             </div>
         </form>

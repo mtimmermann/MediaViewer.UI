@@ -7,9 +7,17 @@ define(function(require, exports, module) {
      */
     //return Backbone.Marionette.ItemView.extend({
     return BaseClasses.ItemViewFadeIn.extend({
-        tagName: 'li',
-        className: 'thumbnail-container',
-        template: ListItemTemplate
+        tagName: 'tr',
+        //className: 'row clearfix',
+        template: ListItemTemplate,
+
+        events: {
+            'click [data-model-list="edit"]': 'edit'
+        },
+
+        edit: function() {
+            window.location.replace('#users/edit/'+ this.model.get('id')); 
+        }
     });
 
 });

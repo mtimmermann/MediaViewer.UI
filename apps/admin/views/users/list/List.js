@@ -7,8 +7,7 @@ define(function(require, exports, module) {
      * List class - Composite view
      */
     return Backbone.Marionette.CompositeView.extend({
-        tagName: 'ul',
-        className: 'thumbnails',
+        tagName: 'table',
         template: ListTemplate,
         itemView: ListItemView,
         //collection: Users,
@@ -18,6 +17,10 @@ define(function(require, exports, module) {
             if (!options.collection) {
                 throw (new Error('List View: collection option is required'));
             }
+        },
+
+        appendHtml: function(collectionView, itemView) {
+            collectionView.$('tbody').append(itemView.el);
         }
 
     });

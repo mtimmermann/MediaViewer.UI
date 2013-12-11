@@ -1,20 +1,11 @@
-<a href="#videos/{{ id }}" class="thumbnail plain">
-    <div>
-        <img src="{{ thumbnail }}" alt="{{ title }}" />
-    </div>
-    <div>
-        <% if (title) { %>
-        <span><strong>{{ title }}</strong></span>
-        <% } %>
-    </div>
-    <div>
-        <% if (subTitle) { %>
-        <span>{{ subTitle }}</span>
-        <% } %>
-    </div>
-    <div class="meta">
-        <% if (userLabel) { %>
-        <span>uploaded by {{ userLabel }}</span>
-        <% } %>
-    </div>
-</a>
+<td>{{ email }}</td>
+<td>{{ lastName }}</td>
+<td>{{ firstName }}</td>
+<td>{{ roles.join() }}</td>
+<td>{{ created }}</td>
+<td>{{ modified }}</td>
+<td>
+    <button data-model-list="edit" type="button" class="active btn btn-xs btn-primary">
+        <i class="glyphicon glyphicon-edit "></i> Edit
+    </button>
+</td>

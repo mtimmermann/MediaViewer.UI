@@ -22,3 +22,11 @@ http://www.webmonkey.com/2013/02/dropzone/
 
 Dropzone require.js AMD
 https://raw.github.com/enyo/dropzone/master/downloads/dropzone-amd-module.js
+
+
+Backbone Marionette
+-------------------
+Composite Tree, Tables, etc.. Views
+http://lostechies.com/derickbailey/2012/04/05/composite-views-tree-structures-tables-and-more/
+Composite pattern:
+http://en.wikipedia.org/wiki/Composite_pattern

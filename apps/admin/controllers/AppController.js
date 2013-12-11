@@ -48,23 +48,23 @@ define(function(require, exports, module) {
         users: function() {
             this._initVideoUserCollection();
 
-            //$.when(App.collections.videos.deferred.promise()).done(function () {
-                // var videoListLayout = new VideoListLayout();
-                // App.mainRegion.show(videoListLayout);
+            $.when(App.collections.users.deferred.promise()).done(function () {
+                var userListLayout = new UserListLayout();
+                App.mainRegion.show(userListLayout);
 
-                // // Show List region
-                // videoListLayout.list.show(
-                //     new VideoListView({'collection': App.collections.videos}));
+                // Show List region
+                userListLayout.list.show(
+                    new UserListView({'collection': App.collections.users}));
 
-                // // Show pagination regions
-                // videoListLayout.paginatorTop.show(
-                //     new PaginatorView(App.collections.videos));
-                // videoListLayout.paginatorBottom.show(
-                //     new PaginatorView(App.collections.videos));
+                // Show pagination regions
+                userListLayout.paginatorTop.show(
+                    new PaginatorView(App.collections.users));
+                userListLayout.paginatorBottom.show(
+                    new PaginatorView(App.collections.users));
 
-                // // Show video search input region
-                // videoListLayout.search.show(new SearchInputView());
-            //});
+                // Show search input region
+                userListLayout.search.show(new SearchInputView());
+            });
         },
 
         userAdd: function() {

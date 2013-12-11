@@ -160,7 +160,7 @@ module.exports = function (grunt) {
             },
             less : {
                 files: ['less/**/*.less'],
-                tasks: ['less', 'requirejs:loginCSS', 'requirejs:mainappCSS', 'notify:less'],
+                tasks: ['less', 'requirejs:loginCSS', 'requirejs:adminCSS', 'requirejs:mainappCSS', 'notify:less'],
                 options: { livereload: true }
             },
             templates: {

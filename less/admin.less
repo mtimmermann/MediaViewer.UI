@@ -25,21 +25,39 @@
 }
 
 .user-list {
-    table {
-        thead th {
-            background-color: #006699;
-            color: #FFFFFF;
-            font-size: 15px;
-            font-weight: bold;
-            border-left: 1px solid #0070A8;
-        }
-        tr:nth-child(even) {
-            background: #E1EEf4;
-            color: #00557F;
-        }
-        tr:nth-child(odd) {
-            //background: #CCC;
-            color: #00557F;
+    .datagrid {
+        border: 1px solid #006699;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        table {
+            border-collapse: collapse;
+            text-align: left;
+            width: 100%;
+            thead th {
+                background-color: #006699;
+                color: #FFFFFF;
+                font-size: 15px;
+                font-weight: bold;
+                border-left: 1px solid #0070A8;
+                padding: 3px 10px;
+            }
+            tr:nth-child(even) {
+                background: #E1EEf4;
+                color: #00557F;
+            }
+            tr:nth-child(odd) {
+                color: #00557F;
+            }
+            tbody {
+                td:first-child {
+                    border-left: none;
+                }
+                td {
+                    border-left: 1px solid #E1EEF4;
+                    padding: 3px 10px;
+                }
+            }
         }
     }
 }

@@ -7,7 +7,8 @@ define(function(require, exports, module) {
      * List class - Composite view
      */
     return Backbone.Marionette.CompositeView.extend({
-        tagName: 'table',
+        tagName: 'div',
+        className: 'datagrid',
         template: ListTemplate,
         itemView: ListItemView,
         //collection: Users,

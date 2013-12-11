@@ -28,6 +28,12 @@ define(function(require, exports, module) {
                 throw (new Error('VideoEdit View: model option is required'));
             }
 
+            // Remove password validation by default. Store the validation
+            //  in case the change password option is chosen.
+            this._validation = _(this.model.validation).clone();
+            delete this.model.validation.password;
+            delete this.model.validation.confirmPassword;
+
             Backbone.Validation.bind(this);
     	},
 
@@ -43,13 +49,25 @@ define(function(require, exports, module) {
             var target = e.target;
             var change = {};
             var property = target.name;
-            change[property] = target.value;
+            var value = target.value;
+
+            // Handle checkbox input groups
+            if ($(target).attr('type').toLowerCase() === 'checkbox') {
+                value = [];
+                _.each(this.$('input[name="'+ target.name +'"]'), function(input) {
+                    if ($(input).is(':checked')) {
+                        value.push($(input).val());
+                    }
+                });
+            }
+
+            change[property] = value;
 
             // Setup the base validation model for the validation call backs.
             this.model.setSingleItemValidation(property);
 
             // Set validate: true to update validation with the model change
-            this.model.set(property, target.value);
+            this.model.set(property, value);
             this.model.set(change, {'validate': true});
 
             // Trigger the item validation.

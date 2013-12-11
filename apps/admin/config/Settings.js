@@ -10,14 +10,18 @@ define(function(require, exports, module) {
 
             userInfo: null,
 
-            defaultAvatarPath: 'img/avatar_default.jpg'
+            defaultAvatarPath: 'img/avatar_default.jpg',
+
+            adminRoles: {
+                'super-admin': 'Admin'
+            }
         }
     };
 
     var Settings = function(settings) {
         var self = this;
 
-        var settingsPrivate = settings.private;
+        //var settingsPrivate = settings.private;
 
         var initialize = function() {
             _.extend(self, settings.public);

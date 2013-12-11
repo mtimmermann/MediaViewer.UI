@@ -9,7 +9,7 @@ define(function(require, exports, module) {
 
         tagName: 'div',
         className: 'user-edit',
-    	template: UserEditTemplate,
+    	//template: UserEditTemplate,
 
     	events: {
             'change': 'change',
@@ -30,6 +30,13 @@ define(function(require, exports, module) {
 
             Backbone.Validation.bind(this);
     	},
+
+        render: function() {
+            var tmp = App.settings.adminRoles;
+            //this.$el.html(UserEditTemplate(this.model.attributes, { rolesMap: App.settings.adminRoles }));
+            this.$el.html(UserEditTemplate({ model: this.model.attributes, rolesMap: App.settings.adminRoles }));
+            return this;
+        },
 
         change: function (e) {
             // Apply the change to the model

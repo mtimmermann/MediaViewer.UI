@@ -14,30 +14,53 @@
                 <div class="inline-block left-region">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" value="{{ email }}" />
+                        <input type="text" id="email" name="email" class="form-control" value="{{ model.email }}" />
                         <span class="help-inline"></span>
                     </div>
                     <div class="form-group">
                         <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" class="form-control" value="{{ firstName }}" />
+                        <input type="text" id="firstName" name="firstName" class="form-control" value="{{ model.firstName }}" />
                         <span class="help-inline"></span>
                     </div>
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" class="form-control" value="{{ lastName }}" />
+                        <input type="text" id="lastName" name="lastName" class="form-control" value="{{ model.lastName }}" />
                         <span class="help-inline"></span>
                     </div>
                 </div>
                 <div class="inline-block right-region">
                     <div class="form-group">
                         <label for="deleted" class="inline-block">Is Deleted</label>
-                        <input type="checkbox" id="deleted" name="deleted" class="form-control checkbox inline-block" <% if (deleted) { %>checked="checked"<% } %> >
+                        <input type="checkbox" id="deleted" name="deleted" class="form-control checkbox inline-block" value="deleted"
+                        <% if (model.deleted) { %>
+                        checked="checked"
+                        <% } %> />
                         <span class="help-inline"></span>
+                    </div>
+                    <div class="form-group">
+                        <!--
+                            http://stackoverflow.com/questions/16852484/use-fieldset-legend-with-bootstrap
+                            http://jsfiddle.net/JamesD/PgA84/1/
+                        -->
+                        <fieldset class="roles-border">
+                            <!--<label for="roles" class="inline-block">Roles</label>-->
+                            <legend class="roles-border">Roles</legend>
+                            <ul class="roles-ul">
+                                <% for(var role in rolesMap) { %>
+                                <li>
+                                    <input name="roles" type="checkbox" value="{{role}}"
+                                    <% if (_.indexOf(model.roles, role) >= 0) { %>
+                                    checked="checked"
+                                    <% } %> /> {{rolesMap[role]}}
+                                </li>
+                                <% } %>
+                            </ul>
+                        </fieldset>
                     </div>
                 </div>
                 <div>
                     <button data-model-edit-button="save" class="btn btn-primary save">Save</button>
-                    <% if (id) { %>
+                    <% if (model.id) { %>
                     <button data-model-edit-button="delete" class="btn delete">Delete</button>
                     <% } %>
                 </div>

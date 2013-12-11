@@ -13,13 +13,13 @@ define(function(require, exports, module) {
 
     	events: {
             'change': 'change',
+            'keyup input[type="text"]': 'change',
+            //'keypress input[type="text"]': 'change',
             'change [data-model-edit-file="input"]': 'readFile',
     		'click [data-model-edit-button="save"]': 'validate',
-    		'click [data-model-edit-button="delete"]': 'delete'
-            // 'drop #edit-model-picture':     'dropHandler',
-            // 'dragover #edit-model-picture': 'dragHandler', // Must call event.preventDefault() for drop event listener to work
-            // 'drop div.well':                  'dropHandler',
-            // 'dragover div.well':              'dragHandler' // Must call event.preventDefault() for drop event listener to work
+    		'click [data-model-edit-button="delete"]': 'delete',
+            'click [data-model-edit="change-password"]': 'toggleChangePassword',
+            'click [data-model-edit="change-password-cancel"]': 'toggleChangePassword'
     	},
 
     	initialize: function(options) {
@@ -30,16 +30,13 @@ define(function(require, exports, module) {
 
             // Remove password validation by default. Store the validation
             //  in case the change password option is chosen.
+            this._showChangePassword = false;
             this._validation = _(this.model.validation).clone();
-            delete this.model.validation.password;
-            delete this.model.validation.confirmPassword;
-
-            Backbone.Validation.bind(this);
+            this._setValidation();
     	},
 
         render: function() {
             var tmp = App.settings.adminRoles;
-            //this.$el.html(UserEditTemplate(this.model.attributes, { rolesMap: App.settings.adminRoles }));
             this.$el.html(UserEditTemplate({ model: this.model.attributes, rolesMap: App.settings.adminRoles }));
             return this;
         },
@@ -87,12 +84,28 @@ define(function(require, exports, module) {
                 return false; // Prevent form submit
             }
 
-            this.save();
+            if (this._showChangePassword) {
+                if (this.model.get('password') === this.model.get('confirmPassword')) {
+                    this.save();
+                } else {
+                    var formGroup = this.$('#confirmPassword').parent('.form-group');
+                    formGroup.addClass('error');
+                    formGroup.find('.help-inline').html('Confirm password and password fields do not match');
+                }
+            } else {
+                this.save();                
+            }
+
             return false; // Prevent form submit
         },
 
         save: function() {
             var self = this;
+
+            if (!this._showChangePassword) {
+                this.model.set('password', '');
+            }
+
             this.model.save(null, {
                 success: function(/*model, response, jqXHR*/) {
                     self._showAlert(self.$('[data-model-edit-alert="save-success"]'));
@@ -125,6 +138,34 @@ define(function(require, exports, module) {
             });
 
         	return false; // Prevent form submit
+        },
+
+        toggleChangePassword: function() {
+            var self = this;
+            this._showChangePassword = !this._showChangePassword;
+            if (this._showChangePassword) {
+                this.$('[data-model-edit="change-password-form-group"]').slideDown();
+                this.$('[data-model-edit="change-password"]').fadeOut('fast', function() {
+                    self.$('[data-model-edit="change-password-cancel"]').fadeIn('fast');
+                });
+            } else {
+                this.$('[data-model-edit="change-password-form-group"]').slideUp();
+                this.$('[data-model-edit="change-password-cancel"]').fadeOut('fast', function() {
+                    self.$('[data-model-edit="change-password"]').fadeIn('fast');
+                });
+            }
+            this._setValidation();
+        },
+
+        _setValidation: function() {
+            if (this._showChangePassword) {
+                this.model.validation.password = _(this._validation.password).clone();
+                this.model.validation.confirmPassword = _(this._validation.confirmPassword).clone();
+            } else {
+                delete this.model.validation.password;
+                delete this.model.validation.confirmPassword;
+            }
+            Backbone.Validation.bind(this);
         },
 
         _showAlert: function(alertDiv) {

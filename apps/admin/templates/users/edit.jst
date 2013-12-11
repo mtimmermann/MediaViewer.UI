@@ -28,7 +28,7 @@
                         <span class="help-inline"></span>
                     </div>
                 </div>
-                <div class="inline-block right-region">
+                <div class="inline-block center-region">
                     <div class="form-group">
                         <label for="deleted" class="inline-block">Is Deleted</label>
                         <input type="checkbox" id="deleted" name="deleted" class="form-control checkbox inline-block" value="deleted"
@@ -38,12 +38,7 @@
                         <span class="help-inline"></span>
                     </div>
                     <div class="form-group">
-                        <!--
-                            http://stackoverflow.com/questions/16852484/use-fieldset-legend-with-bootstrap
-                            http://jsfiddle.net/JamesD/PgA84/1/
-                        -->
                         <fieldset class="roles-border">
-                            <!--<label for="roles" class="inline-block">Roles</label>-->
                             <legend class="roles-border">Roles</legend>
                             <ul class="roles-ul">
                                 <% for(var role in rolesMap) { %>
@@ -56,6 +51,22 @@
                                 <% } %>
                             </ul>
                         </fieldset>
+                    </div>
+                </div>
+                <div class="inline-block center-region">
+                    <button data-model-edit="change-password" type="button" class="active btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit "></i> Change Password</button>
+                    <button data-model-edit="change-password-cancel" type="button" class="active btn btn-xs btn-primary" style="display:none"><i class="glyphicon glyphicon-edit "></i> Cancel Change Password</button>
+                    <div data-model-edit="change-password-form-group" style="display:none">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" class="form-control" value="" placeholder="Password" tabindex="4" />
+                            <span class="help-inline"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" value="" placeholder="Confirm Password" tabindex="5" />
+                            <span class="help-inline"></span>
+                        </div>
                     </div>
                 </div>
                 <div>

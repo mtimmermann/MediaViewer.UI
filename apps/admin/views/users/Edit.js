@@ -12,9 +12,11 @@ define(function(require, exports, module) {
     	//template: UserEditTemplate,
 
     	events: {
-            'change': 'change',
+            //'change': 'change',
             'keyup input[type="text"]': 'change',
-            //'keypress input[type="text"]': 'change',
+            'keyup input[type="password"]': 'change',
+            'click input[type="checkbox"]': 'change',
+
             'change [data-model-edit-file="input"]': 'readFile',
     		'click [data-model-edit-button="save"]': 'validate',
     		'click [data-model-edit-button="delete"]': 'delete',

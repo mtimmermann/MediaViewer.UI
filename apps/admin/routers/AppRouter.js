@@ -5,7 +5,7 @@ define(function(require, exports, module) {
        appRoutes: {
            '': 'index',
            'users': 'users',
-           'users/:id': 'users',
+           //'users/:id': 'users',
            'users/edit/:id': 'userEdit',
            'addUser': 'userAdd'
        }

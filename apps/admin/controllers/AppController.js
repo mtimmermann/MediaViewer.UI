@@ -9,8 +9,8 @@ define(function(require, exports, module) {
         UserListView = require('views/users/list/List'),
         UserDetailsView = require('views/users/Details'),
         UserEditView = require('views/users/Edit'),
-        Users = require('collections/Users');
-        // Video = require('models/Video');
+        Users = require('collections/Users'),
+        User = require('models/User');
 
     return Backbone.Marionette.Controller.extend({
 
@@ -73,47 +73,45 @@ define(function(require, exports, module) {
             App.mainRegion.show(new VideoEditView({model: video}));
         },
 
-        userDetails: function(modelId) {
-            var self = this;
-            this._headerView.setActiveLink('none');
+        // userDetails: function(modelId) {
+        //     var self = this;
+        //     this._headerView.setActiveLink('none');
 
-            // Try finding model in current paged collection, otherwise fetch the model.
-            var model = null;
-            var deferred = new $.Deferred();
-            if (App.collections.videos) {
-                model = _.findWhere(App.collections.videos.models, {'id': modelId});
-                if (model) {
-                    deferred.resolve();
-                }
-            }
-            if (deferred.state() != 'resolved') {
-                model = new Video({'id': modelId});
-                model.fetch().done(function() {
-                    deferred.resolve();
-                }).fail(function(jqXHR/*, textStatus, errorThrown*/) {
-                    if (jqXHR.status === 403) {
-                        self._onLogout();
-                    } else if (jqXHR.status == 404) {
-                        // TODO: 404 - Bootstrap alert message or view
-                    } else {
-                        // TODO: General server - Bootstrap alert message or view
-                    } 
-                });
-            }
-            $.when(deferred.promise()).done(function () {
-                App.mainRegion.show(new VideoDetailsView({ model: model, userInfo: self._userInfo }));
-            });
-        },
+        //     // Try finding model in current paged collection, otherwise fetch the model.
+        //     var model = null;
+        //     var deferred = new $.Deferred();
+        //     if (App.collections.videos) {
+        //         model = _.findWhere(App.collections.videos.models, {'id': modelId});
+        //         if (model) {
+        //             deferred.resolve();
+        //         }
+        //     }
+        //     if (deferred.state() != 'resolved') {
+        //         model = new Video({'id': modelId});
+        //         model.fetch().done(function() {
+        //             deferred.resolve();
+        //         }).fail(function(jqXHR/*, textStatus, errorThrown*/) {
+        //             if (jqXHR.status === 403) {
+        //                 self._onLogout();
+        //             } else if (jqXHR.status == 404) {
+        //                 // TODO: 404 - Bootstrap alert message or view
+        //             } else {
+        //                 // TODO: General server - Bootstrap alert message or view
+        //             } 
+        //         });
+        //     }
+        //     $.when(deferred.promise()).done(function () {
+        //         App.mainRegion.show(new VideoDetailsView({ model: model, userInfo: self._userInfo }));
+        //     });
+        // },
 
         userEdit: function(modelId) {
             var self = this;
             this._headerView.setActiveLink('none');
-            var model = new Video({'id': modelId});
+            var model = new User({'id': modelId});
             var deferred = model.fetch();
             $.when(deferred.promise()).done(function () {
-                if (model.get('ownerId') === self._userInfo.id) {
-                    App.mainRegion.show(new VideoEditView({ model: model }));
-                }// else { TODO: Consider a not authorized view }
+                App.mainRegion.show(new UserEditView({ model: model }));
             }).fail(function(jqXHR/*, textStatus, errorThrown*/) {
                 if (jqXHR.status === 403) {
                     self._onLogout();

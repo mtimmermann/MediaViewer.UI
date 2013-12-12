@@ -40,7 +40,13 @@
                 <div>
                     <button data-model-edit-button="save" class="btn btn-primary save">Save</button>
                     <% if (id) { %>
-                    <button data-model-edit-button="delete" class="btn delete">Delete</button>
+                    <!--<button data-model-edit-button="delete" class="btn delete">Delete</button>-->
+                    <button
+                        data-model-edit-button="destroy"
+                        data-placement="right"
+                        data-title="Are you sure? This will permantantly delete this record."
+                        class="btn btn-danger delete"
+                        tabindex="9">! Destroy Video</button>
                     <% } %>
                 </div>
             </div>

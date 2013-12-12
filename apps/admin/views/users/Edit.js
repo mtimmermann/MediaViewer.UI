@@ -36,12 +36,7 @@ define(function(require, exports, module) {
             this._validation = _(this.model.validation).clone();
             this._setValidation();
 
-            //this._isDeleteConfirmationInitialized = false;
-            //this._isDeleteConfirmShow = false;
-            this._confirmDelete = {
-                isInitialized: false,
-                isShow: false
-            };
+            this._isConfirmDeleteShow = false;
     	},
 
         render: function() {
@@ -133,19 +128,17 @@ define(function(require, exports, module) {
         confirmDestroy: function() {
             var self = this;
             var button = this.$('[data-model-edit-button="destroy"]');
-            if (!this._confirmDelete.isInitialized) {
-                button.confirmation({
-                    onCancel: function() { self.confirmDestroy(); },
-                    onConfirm: function() { self.confirmDestroy(); self.destroy(); return false; }
-                });
-                this._confirmDelete.isInitialized = !this._confirmDelete.isInitialized;
-            }
-            if (!this._confirmDelete.isShow) {
+            button.confirmation('destroy');
+            button.confirmation({
+                onCancel: function() { button.confirmation('hide'); },
+                onConfirm: function() { button.confirmation('hide'); self.destroy(); return false; }
+            });
+            if (!this._isConfirmDeleteShow) {
                 button.confirmation('show');
             } else {
                 button.confirmation('hide');
             }
-            this._confirmDelete.isShow = !this._confirmDelete.isShow;
+            this._isConfirmDeleteShow = !this._isConfirmDeleteShow;
             return false; // Prevent form submit
         },
 

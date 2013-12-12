@@ -12,10 +12,14 @@ define(function(require, exports, module) {
     	template: VideoEditTemplate,
 
     	events: {
-            'change': 'change',
+            //'change': 'change',
+            'keyup input[type="text"]': 'change',
+            'keyup input[type="password"]': 'change',
+            'click input[type="checkbox"]': 'change',
+
             'change [data-model-edit-file="input"]': 'readFile',
     		'click [data-model-edit-button="save"]': 'validate',
-    		'click [data-model-edit-button="delete"]': 'delete'
+    		'click [data-model-edit-button="destroy"]': 'confirmDestroy'
             // 'drop #edit-model-picture':     'dropHandler',
             // 'dragover #edit-model-picture': 'dragHandler', // Must call event.preventDefault() for drop event listener to work
             // 'drop div.well':                  'dropHandler',
@@ -34,9 +38,10 @@ define(function(require, exports, module) {
 
             if (this.model.get('id') && this.model.get('uri') !== '' && 
                 this.model.get('thumbnail') !== '') {
-                    //this._file = 'done';
                     this.model.set('file', 'done');
             }
+
+            this._isConfirmDeleteShow = false;
     	},
 
         onRender: function() {
@@ -51,13 +56,25 @@ define(function(require, exports, module) {
             var target = e.target;
             var change = {};
             var property = target.name;
-            change[property] = target.value;
+            var value = target.value;
+
+            // Handle checkbox input groups
+            if ($(target).attr('type').toLowerCase() === 'checkbox') {
+                value = [];
+                _.each(this.$('input[name="'+ target.name +'"]'), function(input) {
+                    if ($(input).is(':checked')) {
+                        value.push($(input).val());
+                    }
+                });
+            }
+
+            change[property] = value;
 
             // Setup the base validation model for the validation call backs.
             this.model.setSingleItemValidation(property);
 
             // Set validate: true to update validation with the model change
-            this.model.set(property, target.value);
+            this.model.set(property, value);
             this.model.set(change, {'validate': true});
 
             // Trigger the item validation.
@@ -105,7 +122,27 @@ define(function(require, exports, module) {
             });
         },
 
-        delete: function () {
+        // Using http://ethaizone.github.io/Bootstrap-Confirmation/
+        // Note: $(ele).confirmation('toggle') is not working properly,
+        //       using 'show' & 'hide' for now (plugin is Beta)
+        confirmDestroy: function() {
+            var self = this;
+            var button = this.$('[data-model-edit-button="destroy"]');
+            button.confirmation('destroy');
+            button.confirmation({
+                onCancel: function() { button.confirmation('hide'); },
+                onConfirm: function() { button.confirmation('hide'); self.destroy(); return false; }
+            });
+            if (!this._isConfirmDeleteShow) {
+                button.confirmation('show');
+            } else {
+                button.confirmation('hide');
+            }
+            this._isConfirmDeleteShow = !this._isConfirmDeleteShow;
+            return false; // Prevent form submit
+        },
+
+        destroy: function () {
             var self = this;
 
             // Hide all form alerts

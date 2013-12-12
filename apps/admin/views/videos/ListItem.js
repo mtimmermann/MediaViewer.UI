@@ -9,6 +9,13 @@ define(function(require, exports, module) {
     return BaseClasses.ItemViewFadeIn.extend({
         tagName: 'tr',
         template: ListItemTemplate
+
+        // events: {
+        //     'mouseover td': 'hover'
+        // },
+        // hover: function(e) {
+        //     $(e.currentTarget).tooltip();
+        // }
     });
 
 });

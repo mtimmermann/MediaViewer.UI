@@ -57,9 +57,16 @@ define(function(require, exports, module) {
             }).done(function (/*response, textStatus, jqXHR*/) {
                 self._showAlert(self.$('[data-list-alert="delete-success"]'));
                 $('html, body').animate({ scrollTop: 0 }, 'slow');
+                self._hideDeletedRows(orphanIds);
             }).fail(function (/*jqXHR, textStatus, errorThrown*/) {
                 self._showAlert(self.$('[data-list-alert="delete-error"]'));
                 $('html, body').animate({ scrollTop: 0 }, 'slow');
+            });
+        },
+
+        _hideDeletedRows: function(orphanIds) {
+            $.each(this.$('input[name="orphans"]').filter(':checked'), function(index, input) {
+                $(input).parents('tr').fadeOut('slow');
             });
         },
 

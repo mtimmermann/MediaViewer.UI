@@ -73,7 +73,12 @@
                     <div class="form-group">
                         <button data-model-edit-button="save" class="btn btn-primary save" tabindex="8">Save</button>
                         <% if (model.id) { %>
-                        <button data-model-edit-button="delete" class="btn btn-danger delete" tabindex="9">! Destroy Record</button>
+                        <button
+                            data-model-edit-button="destroy"
+                            data-placement="right"
+                            data-title="Are you sure? This will permantantly delete this record."
+                            class="btn btn-danger delete"
+                            tabindex="9">! Destroy Record</button>
                         <% } %>
                     </div>
                 </div>

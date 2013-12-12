@@ -19,7 +19,7 @@ define(function(require, exports, module) {
 
             'change [data-model-edit-file="input"]': 'readFile',
     		'click [data-model-edit-button="save"]': 'validate',
-    		'click [data-model-edit-button="delete"]': 'delete',
+    		'click [data-model-edit-button="destroy"]': 'confirmDestroy',
             'click [data-model-edit="change-password"]': 'toggleChangePassword',
             'click [data-model-edit="change-password-cancel"]': 'toggleChangePassword'
     	},
@@ -35,6 +35,13 @@ define(function(require, exports, module) {
             this._showChangePassword = false;
             this._validation = _(this.model.validation).clone();
             this._setValidation();
+
+            //this._isDeleteConfirmationInitialized = false;
+            //this._isDeleteConfirmShow = false;
+            this._confirmDelete = {
+                isInitialized: false,
+                isShow: false
+            };
     	},
 
         render: function() {
@@ -120,7 +127,29 @@ define(function(require, exports, module) {
             });
         },
 
-        delete: function () {
+        // Using http://ethaizone.github.io/Bootstrap-Confirmation/
+        // Note: $(ele).confirmation('toggle') is not working properly,
+        //       using 'show' & 'hide' for now (plugin is Beta)
+        confirmDestroy: function() {
+            var self = this;
+            var button = this.$('[data-model-edit-button="destroy"]');
+            if (!this._confirmDelete.isInitialized) {
+                button.confirmation({
+                    onCancel: function() { self.confirmDestroy(); },
+                    onConfirm: function() { self.confirmDestroy(); self.destroy(); return false; }
+                });
+                this._confirmDelete.isInitialized = !this._confirmDelete.isInitialized;
+            }
+            if (!this._confirmDelete.isShow) {
+                button.confirmation('show');
+            } else {
+                button.confirmation('hide');
+            }
+            this._confirmDelete.isShow = !this._confirmDelete.isShow;
+            return false; // Prevent form submit
+        },
+
+        destroy: function () {
             var self = this;
 
             // Hide all form alerts

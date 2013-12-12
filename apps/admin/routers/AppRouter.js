@@ -7,7 +7,8 @@ define(function(require, exports, module) {
            'users': 'users',
            //'users/:id': 'users',
            'users/edit/:id': 'userEdit',
-           'addUser': 'userAdd'
+           //'addUser': 'userAdd'
+           'videos': 'videos'
        }
    });
 

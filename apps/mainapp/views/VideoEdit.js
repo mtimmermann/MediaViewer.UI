@@ -190,6 +190,8 @@ define(function(require, exports, module) {
             reader.readAsDataURL(this._file);
             this.model.set('uri', '');
             this.model.set('thumbnail', '');
+            this.model.set('fileId', '');
+            this.model.set('file', 'upload');
         },
 
         uploadFile: function (file, callbackSuccess) {
@@ -206,6 +208,7 @@ define(function(require, exports, module) {
             }).done(function (response/*, textStatus, jqXHR*/) {
                 self.model.set('uri', response.uri);
                 self.model.set('thumbnail', response.thumbnail);
+                self.model.set('fileId', response.fileId);
                 self.model.set('file', 'done');
                 callbackSuccess();
             }).fail(function (/*jqXHR, textStatus, errorThrown*/) {

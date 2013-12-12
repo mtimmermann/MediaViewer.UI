@@ -5,12 +5,19 @@ define(function(require, exports, module) {
 		PaginatorView = require('views/Paginator'),
         SearchInputView = require('views/users/search/SearchInput'),
         IndexView = require('views/Index'),
+
         UserListLayout = require('views/users/list/ListLayout'),
         UserListView = require('views/users/list/List'),
         UserDetailsView = require('views/users/Details'),
         UserEditView = require('views/users/Edit'),
         Users = require('collections/Users'),
-        User = require('models/User');
+        User = require('models/User'),
+
+        VideoListLayout = require('views/videos/ListLayout'),
+        VideoListView = require('views/videos/List'),
+        Videos = require('collections/Videos');
+        //Video = require('models/Video');
+
 
     return Backbone.Marionette.Controller.extend({
 
@@ -46,24 +53,24 @@ define(function(require, exports, module) {
         },
 
         users: function() {
-            this._initVideoUserCollection();
+            this._initUserCollection();
 
             $.when(App.collections.users.deferred.promise()).done(function () {
-                var userListLayout = new UserListLayout();
-                App.mainRegion.show(userListLayout);
+                var listLayout = new UserListLayout();
+                App.mainRegion.show(listLayout);
 
                 // Show List region
-                userListLayout.list.show(
+                listLayout.list.show(
                     new UserListView({'collection': App.collections.users}));
 
                 // Show pagination regions
-                userListLayout.paginatorTop.show(
+                listLayout.paginatorTop.show(
                     new PaginatorView(App.collections.users));
-                userListLayout.paginatorBottom.show(
+                listLayout.paginatorBottom.show(
                     new PaginatorView(App.collections.users));
 
                 // Show search input region
-                userListLayout.search.show(new SearchInputView());
+                listLayout.search.show(new SearchInputView());
             });
         },
 
@@ -123,9 +130,27 @@ define(function(require, exports, module) {
             });
         },
 
-        _initVideoUserCollection: function() {
+        videos: function() {
+            this._initVideoCollection();
+
+            $.when(App.collections.videos.deferred.promise()).done(function () {
+                var listLayout = new VideoListLayout();
+                App.mainRegion.show(listLayout);
+
+                // Show List region
+                listLayout.list.show(
+                    new VideoListView({'collection': App.collections.videos}));
+            });
+        },
+
+        _initUserCollection: function() {
             App.collections.users = new Users();
             App.collections.users.getCollection();
+        },
+
+        _initVideoCollection: function() {
+            App.collections.videos = new Videos();
+            App.collections.videos.getCollection();
         },
 
         // Prevent UI shifting on paging operations

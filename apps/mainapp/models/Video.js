@@ -21,6 +21,7 @@ define(function(require, exports, module) {
             id: null,
             uri: '',
             thumbnail: '',
+            fileId: '',
             title: '',
             subTitle: '',
             notes: ''

@@ -8,7 +8,6 @@ define(function(require, exports, module) {
     //return Backbone.Marionette.ItemView.extend({
     return BaseClasses.ItemViewFadeIn.extend({
         tagName: 'tr',
-        //className: 'row clearfix',
         template: ListItemTemplate,
 
         events: {

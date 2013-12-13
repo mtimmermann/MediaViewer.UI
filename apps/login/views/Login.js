@@ -3,8 +3,13 @@ define(function(require, exports, module) {
     var LoginTemplate = require('tpl!templates/login.jst'),
         LoginModel = require('models/Login');
 
-    // Login class - Item view
-    return BaseClasses.ItemViewFadeIn.extend({
+    /**
+     * Login class - Item view
+     *
+     * Extends the BaseClasses.View.ItemFadeIn class, which
+     * extends the the Marionette.ItemView class.
+     */
+    return BaseClasses.View.ItemFadeIn.extend({
         tagName: 'div',
         className: 'row clearfix login-form',
         template: LoginTemplate,

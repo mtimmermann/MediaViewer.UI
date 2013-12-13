@@ -4,9 +4,11 @@ define(function(require, exports, module) {
 
     /**
      * VideoListItem class - Item view
+     *
+     * Extends the BaseClasses.View.ItemFadeIn class, which
+     * extends the the Marionette.ItemView class.
      */
-    //return Backbone.Marionette.ItemView.extend({
-    return BaseClasses.ItemViewFadeIn.extend({
+    return BaseClasses.View.ItemFadeIn.extend({
         tagName: 'li',
         className: 'thumbnail-container',
         template: VideoListItemTemplate

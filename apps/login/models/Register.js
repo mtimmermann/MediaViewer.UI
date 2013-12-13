@@ -1,7 +1,12 @@
 define(function(require, exports, module) {
 
-    // Register class - model
-    return BaseClasses.ModelFormValidation.extend({
+    /**
+     * Register class - model
+     *
+     * Extends the BaseClasses.Model.FormValidation class, which
+     * extends the the Backbone.Model class.
+     */
+    return BaseClasses.Model.FormValidation.extend({
 
         //urlRoot: AppSettings.baseServiceUrl +'register',
 

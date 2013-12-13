@@ -3,8 +3,13 @@ define(function(require, exports, module) {
     var RegisterTemplate = require('tpl!templates/register.jst'),
         RegisterModel = require('models/Register');
 
-    // Register class - Item view
-    return BaseClasses.ItemViewFadeIn.extend({
+    /**
+     * Register class - Item view
+     *
+     * Extends the BaseClasses.View.ItemFadeIn class, which
+     * extends the the Marionette.ItemView class.
+     */
+    return BaseClasses.View.ItemFadeIn.extend({
         tagName: 'div',
         className: 'row clearfix registration-form',
         template: RegisterTemplate,

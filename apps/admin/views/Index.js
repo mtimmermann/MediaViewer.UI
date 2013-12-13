@@ -5,8 +5,11 @@ define(function(require, exports, module) {
     /**
      * Index class - Item view
      * Admin index page
+     *
+     * Extends the BaseClasses.View.ItemFadeIn class, which
+     * extends the the Marionette.ItemView class.
      */
-    return BaseClasses.ItemViewFadeIn.extend({
+    return BaseClasses.View.ItemFadeIn.extend({
 
         tagName: 'div',
         className: 'admin-index',

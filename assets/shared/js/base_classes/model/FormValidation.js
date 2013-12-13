@@ -1,4 +1,5 @@
 var BaseClasses = BaseClasses || {};
+BaseClasses.Model = BaseClasses.Model || {};
 
 /**
  * BaseClasses.ModelFormValidation class
@@ -6,7 +7,7 @@ var BaseClasses = BaseClasses || {};
  * Extends the Backbone.Model class. Provides basic
  * form validation.
  */
-BaseClasses.ModelFormValidation = Backbone.Model.extend({
+BaseClasses.Model.FormValidation = Backbone.Model.extend({
 
     _currentValidation: {
         isSingleItemValidation: true,

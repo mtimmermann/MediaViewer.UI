@@ -1,4 +1,5 @@
 var BaseClasses = BaseClasses || {};
+BaseClasses.View = BaseClasses.View || {};
 
 /**
  * BaseClasses.RegionFadeIn class
@@ -6,7 +7,7 @@ var BaseClasses = BaseClasses || {};
  * Extends the Marionette.Region class. Overrides the open method
  * to add a fade in / fade out animation.
  */
-BaseClasses.RegionFadeIn = Backbone.Marionette.Region.extend({
+BaseClasses.View.RegionFadeIn = Backbone.Marionette.Region.extend({
 
     // initialize: function(options) {
     //     var options = options || {};

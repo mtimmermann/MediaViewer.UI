@@ -4,8 +4,11 @@ define(function(require, exports, module) {
 
     /**
      * VideoDetails class - Item view
+     *
+     * Extends the BaseClasses.View.ItemFadeIn class, which
+     * extends the the Marionette.ItemView class.
      */
-    return BaseClasses.ItemViewFadeIn.extend({
+    return BaseClasses.View.ItemFadeIn.extend({
 
         tagName: 'div',
         className: 'video-details',

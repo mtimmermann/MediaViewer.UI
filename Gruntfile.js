@@ -92,8 +92,8 @@ module.exports = function (grunt) {
                     'vendor/plugins/serialize-object.js',
                     'vendor/bootstrap/js/bootstrap.js',
                     'assets/shared/js/config/AppSettings.js',
-                    'assets/shared/js/base_classes/ItemViewFadeIn.js',
-                    'assets/shared/js/base_classes/ModelFormValidation.js'
+                    'assets/shared/js/base_classes/view/ItemFadeIn.js',
+                    'assets/shared/js/base_classes/model/FormValidation.js'
                 ]
             },
             admin_plugins: {
@@ -112,9 +112,9 @@ module.exports = function (grunt) {
                     //'vendor/bootstrap/js/bootstrap-dropdown.js',
                     'vendor/moment.js',
                     'assets/shared/js/config/AppSettings.js',
-                    'assets/shared/js/base_classes/ItemViewFadeIn.js',
-                    'assets/shared/js/base_classes/ModelFormValidation.js',
-                    'assets/shared/js/base_classes/RegionFadeIn.js'
+                    'assets/shared/js/base_classes/view/ItemFadeIn.js',
+                    'assets/shared/js/base_classes/model/FormValidation.js'
+                    //'assets/shared/js/base_classes/view/RegionFadeIn.js'
                 ]
             },
             mainapp_plugins: {
@@ -136,9 +136,9 @@ module.exports = function (grunt) {
                     //'vendor/bootstrap/js/bootstrap-dropdown.js',
                     'vendor/moment.js',
                     'assets/shared/js/config/AppSettings.js',
-                    'assets/shared/js/base_classes/ItemViewFadeIn.js',
-                    'assets/shared/js/base_classes/ModelFormValidation.js',
-                    'assets/shared/js/base_classes/RegionFadeIn.js'
+                    'assets/shared/js/base_classes/view/ItemFadeIn.js',
+                    'assets/shared/js/base_classes/model/FormValidation.js'
+                    //'assets/shared/js/base_classes/view/RegionFadeIn.js'
                 ]
             }
         },

@@ -29,6 +29,7 @@ define(function(require, exports, module) {
     	},
 
         _file: null,
+        _laddaSaveBtn: null,
 
     	initialize: function(options) {
             options = options || {};
@@ -72,13 +73,19 @@ define(function(require, exports, module) {
                 return false; // Prevent form submit
             }
 
+            if (!this._laddaSaveBtn) {
+                this._laddaSaveBtn = Ladda.create(this.$('[data-model-edit-button="save"]')[0]);
+            }
+
             if (this._file && this.model.get('file') !== 'done') {
+                this._laddaSaveBtn.start();
                 this.uploadFile(this._file,
                     function () {
                         self.save();
                     }
                 );
             } else {
+                this._laddaSaveBtn.start();
                 this.save();
             }
             return false; // Prevent form submit
@@ -88,10 +95,12 @@ define(function(require, exports, module) {
             var self = this;
             this.model.save(null, {
                 success: function(/*model, response, jqXHR*/) {
+                    self._laddaSaveBtn.stop();
                     self._showAlert(self.$('[data-model-edit-alert="save-success"]'));
                     $('html, body').animate({ scrollTop: 0 }, 'slow');
                 },
                 error: function (/*model, jqXHR, errorThrown*/) {
+                    self._laddaSaveBtn.stop();
                     self._showAlert(self.$('[data-model-edit-alert="error-save"]'));
                     $('html, body').animate({ scrollTop: 0 }, 'slow');
                 }
@@ -121,17 +130,22 @@ define(function(require, exports, module) {
         destroy: function () {
             var self = this;
 
+            var laddaDeleteBtn = Ladda.create(this.$('[data-model-edit-button="destroy"]')[0]);
+            laddaDeleteBtn.start();
+
             // Hide all form alerts
             this.$('div.alert').slideUp();
 
             this.model.destroy({
                 success: function (/*model, response, jqXHR*/) {
+                    laddaDeleteBtn.stop();
                     // TODO: Display bootstrap floating alert
                     self._showAlert(self.$('[data-model-edit-alert="delete-success"]'));
                     $('html, body').animate({ scrollTop: 0 }, 'slow');
                     self.$('[data-model-edit="form-elements"]').fadeOut();
                 },
                 error: function (/*model, jqXHR, errorThrown*/) {
+                    laddaDeleteBtn.stop();
                     self._showAlert(self.$('[data-model-edit-alert="error-delete"]'));
                     $('html, body').animate({ scrollTop: 0 }, 'slow');
                 }
@@ -188,6 +202,7 @@ define(function(require, exports, module) {
                 self.model.set('file', 'done');
                 callbackSuccess();
             }).fail(function (/*jqXHR, textStatus, errorThrown*/) {
+                this._laddaSaveBtn.stop();
                 self._showAlert(self.$('[data-model-edit-alert="error-upload"]'));
                 $('html, body').animate({ scrollTop: 0 }, 'slow');
             });

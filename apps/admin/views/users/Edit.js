@@ -86,12 +86,17 @@ define(function(require, exports, module) {
                 this.model.set('password', '');
             }
 
+            var laddaBtn = Ladda.create(this.$('[data-model-edit-button="save"]')[0]);
+            laddaBtn.start();
+
             this.model.save(null, {
                 success: function(/*model, response, jqXHR*/) {
+                    laddaBtn.stop();
                     self._showAlert(self.$('[data-model-edit-alert="save-success"]'));
                     $('html, body').animate({ scrollTop: 0 }, 'slow');
                 },
                 error: function (/*model, jqXHR, errorThrown*/) {
+                    laddaBtn.stop();
                     self._showAlert(self.$('[data-model-edit-alert="error-save"]'));
                     $('html, body').animate({ scrollTop: 0 }, 'slow');
                 }
@@ -124,14 +129,19 @@ define(function(require, exports, module) {
             // Hide all form alerts
             this.$('div.alert').slideUp();
 
+            var laddaBtn = Ladda.create(this.$('[data-model-edit-button="destroy"]')[0]);
+            laddaBtn.start();
+
             this.model.destroy({
                 success: function (/*model, response, jqXHR*/) {
+                    laddaBtn.stop();
                     // TODO: Display bootstrap floating alert
                     self._showAlert(self.$('[data-model-edit-alert="delete-success"]'));
                     $('html, body').animate({ scrollTop: 0 }, 'slow');
                     self.$('[data-model-edit="form-elements"]').fadeOut();
                 },
                 error: function (/*model, jqXHR, errorThrown*/) {
+                    laddaBtn.stop();
                     self._showAlert(self.$('[data-model-edit-alert="error-delete"]'));
                     $('html, body').animate({ scrollTop: 0 }, 'slow');
                 }

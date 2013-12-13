@@ -71,14 +71,20 @@
                 </div>
                 <div>
                     <div class="form-group">
-                        <button data-model-edit-button="save" class="btn btn-primary save" tabindex="8">Save</button>
+                        <button type="submit"
+                        data-model-edit-button="save"
+                        data-style="expand-left"
+                        data-size="s"
+                        class="btn btn-primary ladda-button" tabindex="8"><span class="ladda-label">Save</span><span class="ladda-spinner"></span></button>
                         <% if (model.id) { %>
                         <button
                             data-model-edit-button="destroy"
+                            data-style="expand-left"
+                            data-size="s"
                             data-placement="right"
                             data-title="Are you sure? This will permantantly delete this record and it's assets."
-                            class="btn btn-danger delete"
-                            tabindex="9">! Destroy Record</button>
+                            class="btn btn-danger ladda-button"
+                            tabindex="9"><span class="ladda-label">! Destroy Record</span><span class="ladda-spinner"></span></button>
                         <% } %>
                     </div>
                 </div>

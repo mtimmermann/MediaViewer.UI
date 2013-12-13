@@ -93,7 +93,8 @@ module.exports = function (grunt) {
                     'vendor/bootstrap/js/bootstrap.js',
                     'assets/shared/js/config/AppSettings.js',
                     'assets/shared/js/base_classes/view/ItemFadeIn.js',
-                    'assets/shared/js/base_classes/model/FormValidation.js'
+                    'assets/shared/js/base_classes/model/FormValidation.js',
+                    'assets/shared/js/base_classes/view/FormValidation.js'
                 ]
             },
             admin_plugins: {
@@ -113,7 +114,8 @@ module.exports = function (grunt) {
                     'vendor/moment.js',
                     'assets/shared/js/config/AppSettings.js',
                     'assets/shared/js/base_classes/view/ItemFadeIn.js',
-                    'assets/shared/js/base_classes/model/FormValidation.js'
+                    'assets/shared/js/base_classes/model/FormValidation.js',
+                    'assets/shared/js/base_classes/view/FormValidation.js'
                     //'assets/shared/js/base_classes/view/RegionFadeIn.js'
                 ]
             },
@@ -137,7 +139,8 @@ module.exports = function (grunt) {
                     'vendor/moment.js',
                     'assets/shared/js/config/AppSettings.js',
                     'assets/shared/js/base_classes/view/ItemFadeIn.js',
-                    'assets/shared/js/base_classes/model/FormValidation.js'
+                    'assets/shared/js/base_classes/model/FormValidation.js',
+                    'assets/shared/js/base_classes/view/FormValidation.js'
                     //'assets/shared/js/base_classes/view/RegionFadeIn.js'
                 ]
             }

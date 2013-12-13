@@ -2,7 +2,7 @@ var BaseClasses = BaseClasses || {};
 BaseClasses.View = BaseClasses.View || {};
 
 /**
- * BaseClasses.RegionFadeIn class
+ * BaseClasses.View.RegionFadeIn class
  *
  * Extends the Marionette.Region class. Overrides the open method
  * to add a fade in / fade out animation.

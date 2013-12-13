@@ -6,10 +6,9 @@ define(function(require, exports, module) {
     /**
      * Register class - Item view
      *
-     * Extends the BaseClasses.View.ItemFadeIn class, which
-     * extends the the Marionette.ItemView class.
+     * Extends the BaseClasses.View.FormValidation class.
      */
-    return BaseClasses.View.ItemFadeIn.extend({
+    return BaseClasses.View.FormValidation.extend({
         tagName: 'div',
         className: 'row clearfix registration-form',
         template: RegisterTemplate,
@@ -26,28 +25,11 @@ define(function(require, exports, module) {
             Backbone.Validation.bind(this);
         },
 
-        change: function (e) {
-            // Apply the change to the model
-            var target = e.target;
-            var change = {};
-            var property = target.name;
-            change[property] = target.value;
-
-            // Setup the base validation model for the validation call backs.
-            this.model.setSingleItemValidation(property);
-
-            // Do not validate if tabbing into text field for the first time
-            var validate = (e.keyCode !== 9) ? true : false;
-
-            // Set validate: true to update validation with the model change
-            this.model.set(property, target.value);
-            this.model.set(change, {'validate': validate});
-
-            // Trigger the item validation.
-            // Note: Form input error handling is performed within the model
-            //       class with the Backbone.Validation callback listener
-            var check = this.model.validateItem(property);
-        },
+        // change method is inherited from BaseClasses.View.FormValidation.
+        // Enable the code below to apply extra logic
+        // change: function() {
+        //     this.constructor.__super__.onRender.apply(this);
+        // },
 
         validate: function () {
             var self = this;

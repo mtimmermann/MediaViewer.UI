@@ -5,10 +5,9 @@ define(function(require, exports, module) {
 	/**
      * UserEdit class - Item view
      *
-     * Extends the BaseClasses.View.ItemFadeIn class, which
-     * extends the the Marionette.ItemView class.
+     * Extends the BaseClasses.View.FormValidation class.
      */
-    return BaseClasses.View.ItemFadeIn.extend({
+    return BaseClasses.View.FormValidation.extend({
 
         tagName: 'div',
         className: 'user-edit',
@@ -48,40 +47,11 @@ define(function(require, exports, module) {
             return this;
         },
 
-        change: function (e) {
-            // Apply the change to the model
-            var target = e.target;
-            var change = {};
-            var property = target.name;
-            var value = target.value;
-
-            // Handle checkbox input groups
-            if ($(target).attr('type').toLowerCase() === 'checkbox') {
-                value = [];
-                _.each(this.$('input[name="'+ target.name +'"]'), function(input) {
-                    if ($(input).is(':checked')) {
-                        value.push($(input).val());
-                    }
-                });
-            }
-
-            change[property] = value;
-
-            // Setup the base validation model for the validation call backs.
-            this.model.setSingleItemValidation(property);
-
-            // Do not validate if tabbing into text field for the first time
-            var validate = (e.keyCode !== 9) ? true : false;
-
-            // Set validate: true to update validation with the model change
-            this.model.set(property, value);
-            this.model.set(change, {'validate': validate});
-
-            // Trigger the item validation.
-            // Note: Form input error handling is performed within the model
-            //       class with the Backbone.Validation callback listener
-            var check = this.model.validateItem(property);
-        },
+        // change method is inherited from BaseClasses.View.FormValidation.
+        // Enable the code below to apply extra logic
+        // change: function() {
+        //     this.constructor.__super__.onRender.apply(this);
+        // },
 
         validate: function () {
 

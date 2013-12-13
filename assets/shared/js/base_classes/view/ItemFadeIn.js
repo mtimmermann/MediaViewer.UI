@@ -2,7 +2,7 @@ var BaseClasses = BaseClasses || {};
 BaseClasses.View = BaseClasses.View || {};
 
 /**
- * BaseClasses.ItemViewFadeIn class
+ * BaseClasses.View.ItemFadeIn class
  *
  * Extends the Marionette.ItemView class. Adds fadein animation
  * using the ItemView onRender and onShow callbacks.

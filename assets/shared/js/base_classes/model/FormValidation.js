@@ -2,7 +2,7 @@ var BaseClasses = BaseClasses || {};
 BaseClasses.Model = BaseClasses.Model || {};
 
 /**
- * BaseClasses.ModelFormValidation class
+ * BaseClasses.Model.FormValidation class
  *
  * Extends the Backbone.Model class. Provides basic
  * form validation.

@@ -12,7 +12,7 @@ define(function(require, exports, module) {
     	//template: UserEditTemplate,
 
     	events: {
-            //'change': 'change',
+            'change': 'change',
             'keyup input[type="text"]': 'change',
             'keyup input[type="password"]': 'change',
             'click input[type="checkbox"]': 'change',
@@ -67,9 +67,12 @@ define(function(require, exports, module) {
             // Setup the base validation model for the validation call backs.
             this.model.setSingleItemValidation(property);
 
+            // Do not validate if tabbing into text field for the first time
+            var validate = (e.keyCode !== 9) ? true : false;
+
             // Set validate: true to update validation with the model change
             this.model.set(property, value);
-            this.model.set(change, {'validate': true});
+            this.model.set(change, {'validate': validate});
 
             // Trigger the item validation.
             // Note: Form input error handling is performed within the model

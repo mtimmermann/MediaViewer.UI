@@ -11,6 +11,8 @@ define(function(require, exports, module) {
 
         events: {
             'change': 'change',
+            'keyup input[type="text"]': 'change',
+            'keyup input[type="password"]': 'change',
             'click [data-login-form-button="login"]': 'validate'
         },
 
@@ -29,9 +31,12 @@ define(function(require, exports, module) {
             // Setup the base validation model for the validation call backs.
             this.model.setSingleItemValidation(property);
 
+            // Do not validate if tabbing into text field for the first time
+            var validate = (e.keyCode !== 9) ? true : false;
+
             // Set validate: true to update validation with the model change
             this.model.set(property, target.value);
-            this.model.set(change, {'validate': true});
+            this.model.set(change, {'validate': validate});
 
             // Trigger the item validation.
             // Note: Form input error handling is performed within the model
@@ -59,6 +64,11 @@ define(function(require, exports, module) {
 
         login: function() {
             var self = this;
+
+
+            var l = Ladda.create(this.$('[data-login-form-button="login"]')[0]);
+            l.start();
+
             $.ajax({
                 type: 'post',
                 contentType: 'application/json',
@@ -77,6 +87,8 @@ define(function(require, exports, module) {
                 } else {
                     self._showAlert(self.$('[data-login-form-alert="tech-problems"]'));
                 }
+            }).always(function() {
+                l.stop();
             });
         },
 

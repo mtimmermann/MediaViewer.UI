@@ -37,7 +37,8 @@ module.exports = function (grunt) {
                     { src: 'vendor/jquery-1.10.2.js', dest: 'deploy/core/js/jquery-1.10.2.js' },
                     { src: 'vendor/dropzone.min.js', dest: 'deploy/core/js/dropzone.min.js' },
                     { src: 'vendor/ie7hacks.js', dest: 'deploy/core/js/ie7hacks.js' },
-                    { expand: true, cwd: 'vendor/bootstrap/fonts', src: '**', dest: 'deploy/fonts' }
+                    { expand: true, cwd: 'vendor/bootstrap/fonts', src: '**', dest: 'deploy/fonts' },
+                    { expand: true, cwd: 'vendor/plugins/bootstrap', src: '**', dest: 'deploy/core/bootstrap/plugins' }
                 ]
             },
             admin: {

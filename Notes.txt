@@ -8,6 +8,10 @@ Bootstrap notifications:
 http://goodybag.github.io/bootstrap-notify/
 https://github.com/goodybag/bootstrap-notify
 
+Ladda bootstrap plugin:
+http://msurguy.github.io/ladda-bootstrap/
+https://github.com/msurguy/ladda-bootstrap/tree/master/dist
+
 
 File uploaders
 --------------

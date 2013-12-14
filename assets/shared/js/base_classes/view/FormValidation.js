@@ -20,7 +20,7 @@ BaseClasses.View.FormValidation = BaseClasses.View.ItemFadeIn.extend({
         var value = target.value;
 
         // Handle checkbox input groups
-        if ($(target).attr('type').toLowerCase() === 'checkbox') {
+        if ($(target).attr('type') && $(target).attr('type').toLowerCase() === 'checkbox') {
             value = [];
             _.each(this.$('input[name="'+ target.name +'"]'), function(input) {
                 if ($(input).is(':checked')) {

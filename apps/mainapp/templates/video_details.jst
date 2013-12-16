@@ -7,44 +7,29 @@
     </div>
 </div>
 <div class="row clearfix">
-    <div class="col-md-12 column ">
-        <div class="inline-block">
-            <p>{{ uri }}</p>
-            <% /*
-            <p>{{ firstName }} {{ lastName }}</p>
-            <p>
-                {{ phone1 }}
-            */ %>
-                <% /* if (phone1_note) { %>
-                {{ phone1_note }}
-                <% } */%>
-            <% /*
-            </p>
-            <p>
-                {{ email1 }}
-            */ %>
-                <% /* if (email1_note) { %>
-                {{ email1_note }}
-                <% } */ %>
-            <% /*
-            </p>
-            <p>
-                {{ city }} {{ region }}, {{ country }}
-            </p>
-            <p>
-                {{ description }}
-            </p>
-            */ %>
-        </div>
-        <% /*
-        <div class="well inline-block contact-image">
-            <img src="{{ picture === null ? App.settings.defaultAvatarPath : App.settings.picsUrl() + picture }}" alt="{{ firstName }}">
-        </div>
-        */ %>
-        <div class="well inline-block">
-            <video width="640" height="360" preload controls>
+    <div class="col-md-12 column inline-block">
+        <div class="well">
+            <!--<video width="640" height="360" preload controls>-->
+            <video preload controls class="video-display">
                 <source src="{{ uri }}" />
             </video>
+        </div>
+        <div>
+            <div>
+                <% if (title) { %>
+                <span><strong>{{ title }}</strong></span>
+                <% } %>
+            </div>
+            <div>
+                <% if (subTitle) { %>
+                <span>{{ subTitle }}</span>
+                <% } %>
+            </div>
+            <div class="meta">
+                <% if (userLabel) { %>
+                <span>uploaded by {{ userLabel }}</span>
+                <% } %>
+            </div>
         </div>
     </div>
 </div>

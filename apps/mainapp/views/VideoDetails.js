@@ -15,7 +15,8 @@ define(function(require, exports, module) {
         template: VideoDetailsTemplate,
 
         events: {
-            'click [data-model-details="edit"]': 'edit'
+            'click [data-model-details="edit"]': 'edit',
+            'click [data-model-details="full-screen"]': 'fullScreen'
         },
 
         initialize: function(options) {
@@ -45,9 +46,13 @@ define(function(require, exports, module) {
             var self = this;
 
             // Initialize the videojs player, adjust the width after load
+            // http://stackoverflow.com/questions/18169473/video-js-size-to-fit-div
             this._player = videojs('video-viewer');
-            this._player.addChild('BigPlayButton');
+            //this._player.addChild('BigPlayButton');
             this._player.ready(function() {
+
+                self._player.addChild('BigPlayButton');
+
                 // TODO: Get actual aspect ratio
                 var aspectRatio = 9/16; // Make up an aspect ratio
 
@@ -61,6 +66,12 @@ define(function(require, exports, module) {
                 resizeVideoJS(); // Initialize the function
                 window.onresize = resizeVideoJS; // Call the function on resize
             });
+        },
+
+        fullScreen: function() {
+            if (this._player) {
+                this._player.requestFullScreen();
+            }
         },
 
         edit: function() {

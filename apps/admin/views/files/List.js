@@ -1,7 +1,7 @@
 define(function(require, exports, module) {
 
-	var ListTemplate = require('tpl!templates/videos/list.jst'),
-		ListItemView = require('views/videos/ListItem');
+	var ListTemplate = require('tpl!templates/files/list.jst'),
+		ListItemView = require('views/files/ListItem');
 
     /**
      * List class - Composite view
@@ -44,14 +44,14 @@ define(function(require, exports, module) {
             // Hide all form alerts
             this.$('div.alert').slideUp();
 
-            var orphanIds = [];
+            var orphanPaths = [];
             $.each(this.$('input[name="orphans"]').filter(':checked'), function(index, input) {
-                orphanIds.push($(input).val());
+                orphanPaths.push($(input).val());
             });
             $.ajax({
-                url: App.settings.baseServiceUrl + 'video/orphans',
+                url: App.settings.baseServiceUrl + 'file/orphans',
                 type: 'DELETE',
-                data: JSON.stringify(orphanIds),
+                data: JSON.stringify(orphanPaths),
                 contentType: 'application/json',
                 dataType: 'json'
             }).done(function (/*response, textStatus, jqXHR*/) {

@@ -32,7 +32,8 @@ define(function(require, exports, module) {
 
 	App.collections = {
 		users: null,
-        videos: null
+        videos: null,
+        files: null
 	};
 
     App.Notifications = {};

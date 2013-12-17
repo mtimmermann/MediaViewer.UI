@@ -15,9 +15,11 @@ define(function(require, exports, module) {
 
         VideoListLayout = require('views/videos/ListLayout'),
         VideoListView = require('views/videos/List'),
-        Videos = require('collections/Videos');
-        //Video = require('models/Video');
+        Videos = require('collections/Videos'),
 
+        FileListLayout = require('views/files/ListLayout'),
+        FileListView = require('views/files/List'),
+        Files = require('collections/Files');
 
     return Backbone.Marionette.Controller.extend({
 
@@ -143,6 +145,19 @@ define(function(require, exports, module) {
             });
         },
 
+        files: function() {
+            this._initFileCollection();
+
+            $.when(App.collections.files.deferred.promise()).done(function () {
+                var listLayout = new FileListLayout();
+                App.mainRegion.show(listLayout);
+
+                // Show List region
+                listLayout.list.show(
+                    new FileListView({'collection': App.collections.files}));
+            });
+        },
+
         _initUserCollection: function() {
             App.collections.users = new Users();
             App.collections.users.getCollection();
@@ -151,6 +166,11 @@ define(function(require, exports, module) {
         _initVideoCollection: function() {
             App.collections.videos = new Videos();
             App.collections.videos.getCollection();
+        },
+
+        _initFileCollection: function() {
+            App.collections.files = new Files();
+            App.collections.files.getCollection();
         },
 
         // Prevent UI shifting on paging operations

@@ -53,8 +53,6 @@ define(function(require, exports, module) {
                 width: videoEle.width(),
                 height: videoEle.height()
             }
-            // var width = videoEle.width(),
-            //     height = videoEle.height();
 
             this._player = videojs(videoEle.attr('id'));
             this._player.addChild('BigPlayButton');
@@ -67,10 +65,10 @@ define(function(require, exports, module) {
                 }
 
                 function resizeVideoJS() {
-                  width = this.$('#'+ self._player.id()).parent().width();
+                    width = this.$('#'+ self._player.id()).parent().width();
 
-                  // Set width to fill parent element, Set height
-                  self._player.width(width).height(width * aspectRatio);
+                    // Set width to fill parent element, Set height
+                    self._player.width(width).height(width * aspectRatio);
                 }
 
                 resizeVideoJS(); // Initialize the function

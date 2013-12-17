@@ -47,20 +47,30 @@ define(function(require, exports, module) {
 
             // Initialize the videojs player, adjust the width after load
             // http://stackoverflow.com/questions/18169473/video-js-size-to-fit-div
-            this._player = videojs('video-viewer-'+ this.model.get('id'));
+            var videoEle = this.$('#video-viewer-'+ this.model.get('id'));
+            //var videoViewerId = 'video-viewer-'+ this.model.get('id');
+            var videoDim = {
+                width: videoEle.width(),
+                height: videoEle.height()
+            }
+            // var width = videoEle.width(),
+            //     height = videoEle.height();
+
+            this._player = videojs(videoEle.attr('id'));
             this._player.addChild('BigPlayButton');
             this._player.ready(function() {
 
-                //self._player.addChild('BigPlayButton');
+                var aspectRatio = 9/16; // default
 
-                // TODO: Get actual aspect ratio
-                var aspectRatio = 9/16; // Make up an aspect ratio
+                if (videoDim.width > 0 && videoDim.height > 0) {
+                    aspectRatio = videoDim.height / videoDim.width;
+                }
 
                 function resizeVideoJS() {
-                  // Get the parent element's actual width
-                  var width = document.getElementById(self._player.id()).parentElement.offsetWidth;
+                  width = this.$('#'+ self._player.id()).parent().width();
+
                   // Set width to fill parent element, Set height
-                  self._player.width(width).height( width * aspectRatio );
+                  self._player.width(width).height(width * aspectRatio);
                 }
 
                 resizeVideoJS(); // Initialize the function

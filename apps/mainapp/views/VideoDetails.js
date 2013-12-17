@@ -47,11 +47,11 @@ define(function(require, exports, module) {
 
             // Initialize the videojs player, adjust the width after load
             // http://stackoverflow.com/questions/18169473/video-js-size-to-fit-div
-            this._player = videojs('video-viewer');
-            //this._player.addChild('BigPlayButton');
+            this._player = videojs('video-viewer-'+ this.model.get('id'));
+            this._player.addChild('BigPlayButton');
             this._player.ready(function() {
 
-                self._player.addChild('BigPlayButton');
+                //self._player.addChild('BigPlayButton');
 
                 // TODO: Get actual aspect ratio
                 var aspectRatio = 9/16; // Make up an aspect ratio

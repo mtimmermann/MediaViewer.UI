@@ -38,7 +38,8 @@ module.exports = function (grunt) {
                     { src: 'vendor/dropzone.min.js', dest: 'deploy/core/js/dropzone.min.js' },
                     { src: 'vendor/ie7hacks.js', dest: 'deploy/core/js/ie7hacks.js' },
                     { expand: true, cwd: 'vendor/bootstrap/fonts', src: '**', dest: 'deploy/fonts' },
-                    { expand: true, cwd: 'vendor/plugins/bootstrap', src: '**', dest: 'deploy/core/bootstrap/plugins' }
+                    { expand: true, cwd: 'vendor/plugins/bootstrap', src: '**', dest: 'deploy/core/plugins/bootstrap' },
+                    { expand: true, cwd: 'vendor/plugins/video-js', src: '**', dest: 'deploy/core/plugins/video-js' }
                 ]
             },
             admin: {

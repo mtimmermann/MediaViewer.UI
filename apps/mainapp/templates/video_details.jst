@@ -10,8 +10,16 @@
     <div class="col-md-12 column inline-block">
         <div class="well">
             <!--<video width="640" height="360" preload controls>-->
-            <video preload controls class="video-display">
+            <!--<video preload controls class="video-display">
                 <source src="{{ uri }}" />
+            </video>-->
+            <video id="video-viewer" class="video-js vjs-default-skin video-display" controls preload="auto" poster="{{ thumbnail }}" data-setup="{}">\
+                <source src="{{ uri }}" type="video/mp4" />
+                <!--<source src="" type='video/mp4' />
+                <source src="" type='video/webm' />
+                <source src="" type='video/ogg' />-->
+                <!--<track kind="captions" src="demo.captions.vtt" srclang="en" label="English"></track>
+                <track kind="subtitles" src="demo.captions.vtt" srclang="en" label="English"></track>-->
             </video>
         </div>
         <div>

@@ -34,12 +34,18 @@ define(function(require, exports, module) {
             this.$('input[name="orphans"]').prop('checked', isChecked);
         },
         toggleDeleteEnabled: function() {
-            var disabled = this.$('input[name="orphans"]').filter(':checked').length === 0;
+            var disabled = this.$('input[name="orphans"]').filter(':checked').filter(':visible').length === 0;
             this.$('[data-list-button="delete"]').prop('disabled', disabled)
         },
 
         deleteSelected: function() {
             var self = this;
+
+            var disableDeleteButtons = false;
+            var l1 = Ladda.create(this.$('[data-list-button="delete"]')[0]);
+            var l2 = Ladda.create(this.$('[data-list-button="delete"]')[1]);
+            l1.start();
+            l2.start();
 
             // Hide all form alerts
             this.$('div.alert').slideUp();
@@ -58,9 +64,20 @@ define(function(require, exports, module) {
                 self._showAlert(self.$('[data-list-alert="delete-success"]'));
                 $('html, body').animate({ scrollTop: 0 }, 'slow');
                 self._hideDeletedRows();
+
+                // Disable the delete buttons, clear the check all input
+                disableDeleteButtons = true
+                self.$('input[name="all"]').prop('checked', false);
             }).fail(function (/*jqXHR, textStatus, errorThrown*/) {
                 self._showAlert(self.$('[data-list-alert="delete-error"]'));
                 $('html, body').animate({ scrollTop: 0 }, 'slow');
+            }).always(function() {
+                l1.stop();
+                l2.stop();
+                if (disableDeleteButtons) {
+                    // Must be performed after ladda .stop()
+                    self.$('[data-list-button="delete"]').prop('disabled', true);
+                }
             });
         },
 

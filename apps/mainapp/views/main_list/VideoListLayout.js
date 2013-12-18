@@ -9,7 +9,7 @@ define(function(require, exports, module) {
 
         template: VideoListLayoutTemplate,
         tagName: 'div',
-        //className: 'content-region-box',
+        className: 'content-region-box',
 
         regions: {
             paginatorTop: '#paginator-top',

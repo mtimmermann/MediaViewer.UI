@@ -49,7 +49,6 @@ define(function(require, exports, module) {
         },
 
         _checkScroll: function() {
-            console.log('checkScroll');
             if (this.collection.currentPage === this.collection.totalPages) {
                 // Remove the scroll listener
                 window.removeEventListener('scroll', this._scrollListener, false);

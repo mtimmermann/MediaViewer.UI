@@ -2,14 +2,24 @@
     <div class="col-md-2 column"></div>
     <div class="col-md-8 column thumbnail-container">
         <a href="#videos/{{ id }}" class="thumbnail plain">
-            <div class="inline-block left-region">
-                <img src="{{ thumbnail }}" alt="{{ title }}" class="hidden-xs" />
-                <img src="{{ thumbnail }}" alt="{{ title }}" class="visible-xs small" />
-                <% /*
-                <img src="{{ picture === null ? App.settings.defaultAvatarPath : App.settings.picsUrl() + picture }}" alt="{{ firstName }}" class="hidden-xs">
-                <img src="{{ picture === null ? App.settings.defaultAvatarPath : App.settings.picsUrl() + picture }}" alt="{{ firstName }}" class="visible-xs small">
-                */ %>
+
+            <div class="thumb-display-container hidden-xs"> <!-- Responsive normal above xs -->
+                <div class="thumb-display-inner-wrapper">
+                    <img src="{{ thumbnail }}" alt="{{ title }}" />
+                    <% if (durationFormatted) { %>
+                    <div>{{ durationFormatted }}</div>
+                    <% } %>
+                </div>
             </div>
+            <div class="thumb-display-container"> <!-- Responsive xs -->
+                <div class="thumb-display-inner-wrapper visible-xs small">
+                    <img src="{{ thumbnail }}" alt="{{ title }}" class="visible-xs small" />
+                    <% if (durationFormatted) { %>
+                    <div>{{ durationFormatted }}</div>
+                    <% } %>
+                </div>
+            </div>
+
             <div class="inline-block center-region">
                 <div>
                     <% if (title) { %>

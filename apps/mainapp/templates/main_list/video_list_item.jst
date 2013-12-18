@@ -1,6 +1,11 @@
 <a href="#videos/{{ id }}" class="thumbnail plain">
-    <div>
-        <img src="{{ thumbnail }}" alt="{{ title }}" />
+    <div class="thumb-display-container">
+        <div class="thumb-display-inner-wrapper">
+            <img src="{{ thumbnail }}" alt="{{ title }}" />
+            <% if (durationFormatted) { %>
+            <div>{{ durationFormatted }}</div>
+            <% } %>
+        </div>
     </div>
     <div>
         <% if (title) { %>

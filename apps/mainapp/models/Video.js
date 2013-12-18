@@ -13,9 +13,18 @@ define(function(require, exports, module) {
         // initialize: function(attributes, options) { },
 
         parse: function(data) {
-            // Temporary, must fix service and ensure id is returned
-            if (!data.id && data._id) {
-                data.id = data._id;
+
+            data.durationFormatted = '';
+            if (data.meta && data.meta.format &&
+                typeof data.meta.format.duration === 'number') {
+                    data.durationFormatted = data.meta.format.duration.toFixed(2);
+            }
+
+            if (!data.meta) {
+                data.meta = { format: {} };
+            }
+            if (!data.meta.format) {
+                data.meta.format = {};
             }
             return data;
         },

@@ -54,10 +54,31 @@
             float: left;
             margin-right: 10px;
             display: list-item;
-            img {
-                width: 125px;
-                /*height: 98px;*/
+            .thumb-display-container {
+                //position: relative;
+                .thumb-display-inner-wrapper {
+                    position: relative;
+                    height: 98px;
+                    img {
+                        position: absolute;
+                        //width: 125px;
+                        height: 98px;
+                    }
+                    div {
+                        position: absolute;
+                        z-index: 1;
+                        bottom: 0px;
+                        //margin-left: 5px;
+                        padding: 2px;
+                        color: #fff;
+                        font-size: 11px;
+                        font-weight: bold;
+                        background-color: #000;
+                        opacity: .75;
+                    }
+                }
             }
+
             /*img {
                 width: 150px;
                 height: 150px;

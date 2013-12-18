@@ -25,7 +25,8 @@ module.exports = function (grunt) {
         copy: {
             assets: {
                 files: [
-                    { src: 'assets/img/avatar_default.jpg', dest: 'deploy/img/avatar_default.jpg' }
+                    { expand: true, cwd: 'assets/img', src: '***', dest: 'deploy/img' }
+                    //{ src: 'assets/img/avatar_default.jpg', dest: 'deploy/img/avatar_default.jpg' }
                     //{ src: 'assets/shared/img/favicon.ico', dest: 'deploy/shared/img/favicon.ico' }
                     //{ expand: true, cwd: 'assets/img/', src: '**', dest: 'deploy' }
                 ]

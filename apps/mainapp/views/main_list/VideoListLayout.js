@@ -8,6 +8,8 @@ define(function(require, exports, module) {
     return Backbone.Marionette.Layout.extend({
 
         template: VideoListLayoutTemplate,
+        tagName: 'div',
+        //className: 'content-region-box',
 
         regions: {
             paginatorTop: '#paginator-top',

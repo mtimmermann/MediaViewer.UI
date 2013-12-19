@@ -8,7 +8,7 @@ define(function(require, exports, module) {
     return Backbone.Marionette.ItemView.extend({
 
         tagName: 'div',
-        className: 'video-list-infinite-scroll',
+        className: 'video-list-infinite-scroll content-region-box',
 
         initialize: function(options) {
             options = options || {};

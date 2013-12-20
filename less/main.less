@@ -2,6 +2,7 @@
 //@import "../fontawesome/font-awesome.less";
 @import "_variables.less";
 //@import "_utilities.less";
+@import "_mixins.less";
 //@import "_fonts.less";
 @import "_sitewide.less";
 
@@ -36,19 +37,20 @@
             //color: #333;
             color: #1818f0;
             text-decoration: none;
-            background-color: #eee;
+            .gradient-to-top-right(#fafaf9, #eee, 0.3, 0.7);
         }
         a.plain:visited {
             //color: #333;
             color: #1818f0;
             text-decoration: none;
-            background-color: #eee;
+            .gradient-to-top-right(#fafaf9, #eee, 0.3, 0.7);
         }
         a:hover {
             color: #2a6496 !important;
             border-color: #0088cc;
             //background-color: #fcfafa !important;
-            background-color: #fffff0 !important;
+            //background-color: #fffff0 !important;
+            .gradient-to-top-right(#fafaf9, #fff, 0.4, 0.6) !important;
         }
         .meta {
             font-family: @proxima-bold;

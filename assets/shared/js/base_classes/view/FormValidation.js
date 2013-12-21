@@ -12,7 +12,21 @@ BaseClasses.View = BaseClasses.View || {};
  */
 BaseClasses.View.FormValidation = BaseClasses.View.ItemFadeIn.extend({
 
-    change: function (e) {
+    _inValidList: [],
+
+    inputKeyup: function(e) {
+        var target = e.target;
+        var property = target.name;
+        if ($(target).parent('.form-group').hasClass('error') || _.indexOf(this._inValidList, property) >=0) {
+            this._inputValidate(e);
+        }
+    },
+
+    inputChange: function(e) {
+        this._inputValidate(e);
+    },
+
+    _inputValidate: function (e) {
         // Apply the change to the model
         var target = e.target;
         var change = {};
@@ -22,7 +36,7 @@ BaseClasses.View.FormValidation = BaseClasses.View.ItemFadeIn.extend({
         // Handle checkbox input groups
         if ($(target).attr('type') && $(target).attr('type').toLowerCase() === 'checkbox') {
             value = [];
-            _.each(this.$('input[name="'+ target.name +'"]'), function(input) {
+            _.each(this.$('input[name="'+ property +'"]'), function(input) {
                 if ($(input).is(':checked')) {
                     value.push($(input).val());
                 }
@@ -45,6 +59,10 @@ BaseClasses.View.FormValidation = BaseClasses.View.ItemFadeIn.extend({
         // Note: Form input error handling is performed within the model
         //       class with the Backbone.Validation callback listener
         var check = this.model.validateItem(property);
+
+        if (!check && _.indexOf(this._inValidList, property) < 0) {
+            this._inValidList.push(property);
+        }
     }
 
 });

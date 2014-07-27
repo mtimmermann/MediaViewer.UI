@@ -14,9 +14,9 @@ define(function(require, exports, module) {
         template: LoginTemplate,
 
         events: {
-            'change': 'change',
-            'keyup input[type="text"]': 'change',
-            'keyup input[type="password"]': 'change',
+            'change': 'inputChange',
+            'keyup input[type="text"]': 'inputKeyup',
+            'keyup input[type="password"]': 'inputKeyup',
             'click [data-login-form-button="login"]': 'validate'
         },
 

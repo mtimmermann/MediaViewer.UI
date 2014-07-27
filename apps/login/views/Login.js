@@ -25,9 +25,9 @@ define(function(require, exports, module) {
             Backbone.Validation.bind(this);
         },
 
-        // change method is inherited from BaseClasses.View.FormValidation.
+        // inputChange method is inherited from BaseClasses.View.FormValidation.
         // Enable the code below to apply extra logic
-        // change: function() {
+        // inputChange: function() {
         //     this.constructor.__super__.onRender.apply(this);
         // },
 

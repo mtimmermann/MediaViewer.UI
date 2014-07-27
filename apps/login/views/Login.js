@@ -52,7 +52,6 @@ define(function(require, exports, module) {
         login: function() {
             var self = this;
 
-
             var l = Ladda.create(this.$('[data-login-form-button="login"]')[0]);
             l.start();
 

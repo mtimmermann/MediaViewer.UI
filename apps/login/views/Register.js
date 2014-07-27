@@ -15,8 +15,8 @@ define(function(require, exports, module) {
 
         events: {
             'change': 'inputChange',
-            'keyup input[type="text"]': 'change',
-            'keyup input[type="password"]': 'change',
+            'keyup input[type="text"]': 'inputKeyup',
+            'keyup input[type="password"]': 'inputKeyup',
             'click [data-registration-form-button="signup"]': 'validate'
         },
 
@@ -25,9 +25,9 @@ define(function(require, exports, module) {
             Backbone.Validation.bind(this);
         },
 
-        // inputChange method is inherited from BaseClasses.View.FormValidation.
+        // change method is inherited from BaseClasses.View.FormValidation.
         // Enable the code below to apply extra logic
-        // inputChange: function() {
+        // change: function() {
         //     this.constructor.__super__.onRender.apply(this);
         // },
 
